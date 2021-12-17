@@ -31,18 +31,20 @@ typedef void (*ngx_pool_cleanup_pt)(void *data);
 
 typedef struct ngx_pool_cleanup_s  ngx_pool_cleanup_t;
 
+/**     自定义清理回调的数据结构        */
 struct ngx_pool_cleanup_s {
-    ngx_pool_cleanup_pt   handler;
-    void                 *data;
-    ngx_pool_cleanup_t   *next;
+    ngx_pool_cleanup_pt   handler;          // 清理的回调函数
+    void                 *data;             // 指向存储的数据地址
+    ngx_pool_cleanup_t   *next;             // 下一个ngx_pool_cleanup_t
 };
 
 
 typedef struct ngx_pool_large_s  ngx_pool_large_t;
 
+/**     大数据块结构      */
 struct ngx_pool_large_s {
-    ngx_pool_large_t     *next;
-    void                 *alloc;
+    ngx_pool_large_t     *next;             // 指向下一个存储地址 通过这个地址可以知道当前块长度
+    void                 *alloc;            // 数据块指针地址
 };
 
 /**     数据区域结构      */
