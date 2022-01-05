@@ -12,105 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/nginx" beforeDir="false" afterPath="$PROJECT_DIR$/objs/nginx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/ngx_modules.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/ngx_modules.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/nginx.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/nginx.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_array.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_array.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_buf.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_buf.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_conf_file.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_conf_file.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_connection.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_connection.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_crc32.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_crc32.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_crypt.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_crypt.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_cycle.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_cycle.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_file.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_file.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_hash.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_hash.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_inet.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_inet.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_list.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_list.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_log.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_log.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_open_file_cache.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_open_file_cache.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_output_chain.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_output_chain.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_palloc.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_palloc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_proxy_protocol.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_proxy_protocol.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_radix_tree.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_radix_tree.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_regex.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_regex.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_resolver.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_resolver.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_string.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_string.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_syslog.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_syslog.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/modules/ngx_kqueue_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/modules/ngx_kqueue_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event_accept.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event_accept.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event_connect.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event_connect.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event_pipe.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event_pipe.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event_posted.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event_posted.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/event/ngx_event_timer.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/event/ngx_event_timer.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_access_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_access_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_auth_basic_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_auth_basic_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_autoindex_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_autoindex_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_browser_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_browser_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_charset_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_charset_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_chunked_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_chunked_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_empty_gif_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_empty_gif_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_fastcgi_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_fastcgi_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_geo_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_geo_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_gzip_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_gzip_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_headers_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_headers_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_index_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_index_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_limit_conn_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_limit_conn_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_limit_req_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_limit_req_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_log_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_log_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_map_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_map_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_memcached_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_memcached_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_not_modified_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_not_modified_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_proxy_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_proxy_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_range_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_range_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_referer_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_referer_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_rewrite_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_rewrite_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_scgi_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_scgi_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_split_clients_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_split_clients_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_ssi_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_ssi_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_static_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_static_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_hash_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_hash_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_ip_hash_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_ip_hash_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_keepalive_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_keepalive_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_least_conn_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_least_conn_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_zone_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_upstream_zone_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_userid_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_userid_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_uwsgi_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/modules/ngx_http_uwsgi_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_copy_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_copy_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_core_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_core_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_file_cache.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_file_cache.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_header_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_header_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_parse.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_parse.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_postpone_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_postpone_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_request.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_request.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_request_body.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_request_body.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_script.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_script.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_special_response.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_special_response.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_upstream.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_upstream.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_upstream_round_robin.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_upstream_round_robin.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_variables.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_variables.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/http/ngx_http_write_filter_module.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/http/ngx_http_write_filter_module.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_channel.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_channel.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_darwin_init.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_darwin_init.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_darwin_sendfile_chain.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_darwin_sendfile_chain.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_files.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_files.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_posix_init.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_posix_init.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_process.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_process.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_process_cycle.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_process_cycle.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_readv_chain.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_readv_chain.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_recv.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_recv.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_send.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_send.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_setproctitle.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_setproctitle.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_recv.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_recv.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_send.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_send.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_sendmsg_chain.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_udp_sendmsg_chain.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_user.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_user.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_writev_chain.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_writev_chain.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/ngx_palloc.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_palloc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_alloc.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_alloc.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +72,8 @@
       <option name="presentableId" value="Default" />
       <updated>1639718644515</updated>
       <workItem from="1639718645747" duration="1558000" />
-      <workItem from="1641371402586" duration="188000" />
+      <workItem from="1641371402586" duration="374000" />
+      <workItem from="1641371785633" duration="1841000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -177,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639720097743</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="修改cmakelist.txt">
+      <created>1641371611868</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1641371611868</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,61 +97,62 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nginx内存池" />
-    <option name="LAST_COMMIT_MESSAGE" value="nginx内存池" />
+    <MESSAGE value="修改cmakelist.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改cmakelist.txt" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1641371590256">
+    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1641371939829">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.981@0.25.1920.981" timestamp="1641371590256" />
+    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.981@0.25.1920.981" timestamp="1641371939829" />
     <state x="710" y="256" key="#nginx-1.12.2" timestamp="1641371498625">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
     <state x="710" y="256" key="#nginx-1.12.2/0.25.1920.981@0.25.1920.981" timestamp="1641371498625" />
-    <state x="616" y="97" key="CommitChangelistDialog2" timestamp="1639720097595">
+    <state x="616" y="97" key="CommitChangelistDialog2" timestamp="1641371611270">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="616" y="97" key="CommitChangelistDialog2/0.25.1920.981@0.25.1920.981" timestamp="1639720097595" />
-    <state width="1796" height="303" key="GridCell.Tab.0.bottom" timestamp="1641371581134">
+    <state x="616" y="97" key="CommitChangelistDialog2/0.25.1920.981@0.25.1920.981" timestamp="1641371611270" />
+    <state width="1796" height="303" key="GridCell.Tab.0.bottom" timestamp="1641371776721">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641371581134" />
-    <state width="1796" height="303" key="GridCell.Tab.0.center" timestamp="1641371581134">
+    <state width="1796" height="303" key="GridCell.Tab.0.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641371776721" />
+    <state width="1796" height="303" key="GridCell.Tab.0.center" timestamp="1641371776720">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.center/0.25.1920.981@0.25.1920.981" timestamp="1641371581134" />
-    <state width="1796" height="303" key="GridCell.Tab.0.left" timestamp="1641371581133">
+    <state width="1796" height="303" key="GridCell.Tab.0.center/0.25.1920.981@0.25.1920.981" timestamp="1641371776720" />
+    <state width="1796" height="303" key="GridCell.Tab.0.left" timestamp="1641371776720">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.left/0.25.1920.981@0.25.1920.981" timestamp="1641371581133" />
-    <state width="1796" height="303" key="GridCell.Tab.0.right" timestamp="1641371581134">
+    <state width="1796" height="303" key="GridCell.Tab.0.left/0.25.1920.981@0.25.1920.981" timestamp="1641371776720" />
+    <state width="1796" height="303" key="GridCell.Tab.0.right" timestamp="1641371776720">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.right/0.25.1920.981@0.25.1920.981" timestamp="1641371581134" />
-    <state width="1796" height="303" key="GridCell.Tab.1.bottom" timestamp="1641371581135">
+    <state width="1796" height="303" key="GridCell.Tab.0.right/0.25.1920.981@0.25.1920.981" timestamp="1641371776720" />
+    <state width="1796" height="303" key="GridCell.Tab.1.bottom" timestamp="1641371776721">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641371581135" />
-    <state width="1796" height="303" key="GridCell.Tab.1.center" timestamp="1641371581134">
+    <state width="1796" height="303" key="GridCell.Tab.1.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641371776721" />
+    <state width="1796" height="303" key="GridCell.Tab.1.center" timestamp="1641371776721">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.center/0.25.1920.981@0.25.1920.981" timestamp="1641371581134" />
-    <state width="1796" height="303" key="GridCell.Tab.1.left" timestamp="1641371581134">
+    <state width="1796" height="303" key="GridCell.Tab.1.center/0.25.1920.981@0.25.1920.981" timestamp="1641371776721" />
+    <state width="1796" height="303" key="GridCell.Tab.1.left" timestamp="1641371776721">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.left/0.25.1920.981@0.25.1920.981" timestamp="1641371581134" />
-    <state width="1796" height="303" key="GridCell.Tab.1.right" timestamp="1641371581135">
+    <state width="1796" height="303" key="GridCell.Tab.1.left/0.25.1920.981@0.25.1920.981" timestamp="1641371776721" />
+    <state width="1796" height="303" key="GridCell.Tab.1.right" timestamp="1641371776721">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.right/0.25.1920.981@0.25.1920.981" timestamp="1641371581135" />
-    <state x="622" y="237" key="Vcs.Push.Dialog.v2" timestamp="1639720099249">
+    <state width="1796" height="303" key="GridCell.Tab.1.right/0.25.1920.981@0.25.1920.981" timestamp="1641371776721" />
+    <state x="622" y="237" key="Vcs.Push.Dialog.v2" timestamp="1641371616686">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="622" y="237" key="Vcs.Push.Dialog.v2/0.25.1920.981@0.25.1920.981" timestamp="1639720099249" />
-    <state x="689" y="257" width="667" height="486" key="find.popup" timestamp="1639719277131">
+    <state x="622" y="237" key="Vcs.Push.Dialog.v2/0.25.1920.981@0.25.1920.981" timestamp="1641371616686" />
+    <state x="689" y="257" width="667" height="486" key="find.popup" timestamp="1641373058664">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="689" y="257" width="667" height="486" key="find.popup/0.25.1920.981@0.25.1920.981" timestamp="1639719277131" />
+    <state x="689" y="257" width="667" height="486" key="find.popup/0.25.1920.981@0.25.1920.981" timestamp="1641373058664" />
     <state x="687" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1639719265614">
       <screen x="0" y="25" width="1920" height="981" />
     </state>

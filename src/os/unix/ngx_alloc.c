@@ -14,12 +14,13 @@ ngx_uint_t  ngx_pagesize_shift;
 ngx_uint_t  ngx_cacheline_size;
 
 
+//// 封装了malloc函数，并且添加了日志
 void *
 ngx_alloc(size_t size, ngx_log_t *log)
 {
     void  *p;
 
-    p = malloc(size);
+    p = malloc(size);                                   // 分配一块内存
     if (p == NULL) {
         ngx_log_error(NGX_LOG_EMERG, log, ngx_errno,
                       "malloc(%uz) failed", size);
@@ -30,16 +31,16 @@ ngx_alloc(size_t size, ngx_log_t *log)
     return p;
 }
 
-
+//// 调用ngx_alloc方法，如果分配成，则调用ngx_memzero方法，将内存块设置为0
 void *
 ngx_calloc(size_t size, ngx_log_t *log)
 {
     void  *p;
 
-    p = ngx_alloc(size, log);
+    p = ngx_alloc(size, log);                           // 调用内存分配函数
 
     if (p) {
-        ngx_memzero(p, size);
+        ngx_memzero(p, size);                           // 将内存块全部设置为0
     }
 
     return p;
