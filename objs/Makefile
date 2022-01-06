@@ -1159,64 +1159,64 @@ objs/src/http/modules/ngx_http_upstream_zone_module.o:	$(CORE_DEPS) $(HTTP_DEPS)
 manpage:	objs/nginx.8
 
 objs/nginx.8:	man/nginx.8 objs/ngx_auto_config.h
-	sed -e "s|%%PREFIX%%|/Users/yaokun/nginx-private/output1.12|" \
-		-e "s|%%PID_PATH%%|/Users/yaokun/nginx-private/output1.12/logs/nginx.pid|" \
-		-e "s|%%CONF_PATH%%|/Users/yaokun/nginx-private/output1.12/conf/nginx.conf|" \
-		-e "s|%%ERROR_LOG_PATH%%|/Users/yaokun/nginx-private/output1.12/logs/error.log|" \
+	sed -e "s|%%PREFIX%%|/Users/yaokun/nginx-private/test|" \
+		-e "s|%%PID_PATH%%|/Users/yaokun/nginx-private/test/logs/nginx.pid|" \
+		-e "s|%%CONF_PATH%%|/Users/yaokun/nginx-private/test/conf/nginx.conf|" \
+		-e "s|%%ERROR_LOG_PATH%%|/Users/yaokun/nginx-private/test/logs/error.log|" \
 		< man/nginx.8 > $@
 
 install:	build 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12' || mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test' || mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin' \
-		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin'
-	test ! -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin/nginx' \
-		|| mv '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin/nginx' \
-			'$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin/nginx.old'
-	cp objs/nginx '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/sbin/nginx'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/sbin' \
+		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test/sbin'
+	test ! -f '$(DESTDIR)/Users/yaokun/nginx-private/test/sbin/nginx' \
+		|| mv '$(DESTDIR)/Users/yaokun/nginx-private/test/sbin/nginx' \
+			'$(DESTDIR)/Users/yaokun/nginx-private/test/sbin/nginx.old'
+	cp objs/nginx '$(DESTDIR)/Users/yaokun/nginx-private/test/sbin/nginx'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf' \
-		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/conf' \
+		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
 
-	cp conf/koi-win '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
-	cp conf/koi-utf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
-	cp conf/win-utf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
+	cp conf/koi-win '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
+	cp conf/koi-utf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
+	cp conf/win-utf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/mime.types' \
-		|| cp conf/mime.types '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
-	cp conf/mime.types '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/mime.types.default'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/mime.types' \
+		|| cp conf/mime.types '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
+	cp conf/mime.types '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/mime.types.default'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/fastcgi_params' \
-		|| cp conf/fastcgi_params '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/fastcgi_params' \
+		|| cp conf/fastcgi_params '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
 	cp conf/fastcgi_params \
-		'$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/fastcgi_params.default'
+		'$(DESTDIR)/Users/yaokun/nginx-private/test/conf/fastcgi_params.default'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/fastcgi.conf' \
-		|| cp conf/fastcgi.conf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
-	cp conf/fastcgi.conf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/fastcgi.conf.default'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/fastcgi.conf' \
+		|| cp conf/fastcgi.conf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
+	cp conf/fastcgi.conf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/fastcgi.conf.default'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/uwsgi_params' \
-		|| cp conf/uwsgi_params '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/uwsgi_params' \
+		|| cp conf/uwsgi_params '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
 	cp conf/uwsgi_params \
-		'$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/uwsgi_params.default'
+		'$(DESTDIR)/Users/yaokun/nginx-private/test/conf/uwsgi_params.default'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/scgi_params' \
-		|| cp conf/scgi_params '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/scgi_params' \
+		|| cp conf/scgi_params '$(DESTDIR)/Users/yaokun/nginx-private/test/conf'
 	cp conf/scgi_params \
-		'$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/scgi_params.default'
+		'$(DESTDIR)/Users/yaokun/nginx-private/test/conf/scgi_params.default'
 
-	test -f '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/nginx.conf' \
-		|| cp conf/nginx.conf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/nginx.conf'
-	cp conf/nginx.conf '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/conf/nginx.conf.default'
+	test -f '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/nginx.conf' \
+		|| cp conf/nginx.conf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/nginx.conf'
+	cp conf/nginx.conf '$(DESTDIR)/Users/yaokun/nginx-private/test/conf/nginx.conf.default'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs' \
-		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/logs' \
+		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test/logs'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs' \
-		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/logs' \
+		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test/logs'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/html' \
-		|| cp -R html '$(DESTDIR)/Users/yaokun/nginx-private/output1.12'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/html' \
+		|| cp -R html '$(DESTDIR)/Users/yaokun/nginx-private/test'
 
-	test -d '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs' \
-		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/output1.12/logs'
+	test -d '$(DESTDIR)/Users/yaokun/nginx-private/test/logs' \
+		|| mkdir -p '$(DESTDIR)/Users/yaokun/nginx-private/test/logs'

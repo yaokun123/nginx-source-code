@@ -1,4 +1,4 @@
-#define NGX_CONFIGURE " --prefix=/Users/yaokun/nginx-private/output1.12 --with-debug"
+#define NGX_CONFIGURE " --prefix=/Users/yaokun/nginx-private/test --with-debug"
 
 #ifndef NGX_DEBUG
 #define NGX_DEBUG  1
@@ -304,7 +304,7 @@
 
 
 #ifndef NGX_PREFIX
-#define NGX_PREFIX  "/Users/yaokun/nginx-private/output1.12/"
+#define NGX_PREFIX  "/Users/yaokun/nginx-private/test/"
 #endif
 
 

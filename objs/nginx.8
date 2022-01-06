@@ -61,7 +61,7 @@ for details.
 .It Fl p Ar prefix
 Set the prefix path.
 The default value is
-.Pa /Users/yaokun/nginx-private/output1.12 .
+.Pa /Users/yaokun/nginx-private/test .
 .It Fl q
 Suppress non-error messages during configuration testing.
 .It Fl s Ar signal
@@ -164,13 +164,13 @@ environment variable is used internally by
 and should not be set directly by the user.
 .Sh FILES
 .Bl -tag -width indent
-.It Pa /Users/yaokun/nginx-private/output1.12/logs/nginx.pid
+.It Pa /Users/yaokun/nginx-private/test/logs/nginx.pid
 Contains the process ID of
 .Nm .
 The contents of this file are not sensitive, so it can be world-readable.
-.It Pa /Users/yaokun/nginx-private/output1.12/conf/nginx.conf
+.It Pa /Users/yaokun/nginx-private/test/conf/nginx.conf
 The main configuration file.
-.It Pa /Users/yaokun/nginx-private/output1.12/logs/error.log
+.It Pa /Users/yaokun/nginx-private/test/logs/error.log
 Error log file.
 .El
 .Sh EXIT STATUS

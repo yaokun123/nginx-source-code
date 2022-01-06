@@ -12,11 +12,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CMakeLists_old_2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auto/cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_old.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configure" beforeDir="false" afterPath="$PROJECT_DIR$/configure" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/objs/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/objs/nginx" beforeDir="false" afterPath="$PROJECT_DIR$/objs/nginx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_palloc.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_palloc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/src/os/unix/ngx_alloc.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/os/unix/ngx_alloc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/nginx.8" beforeDir="false" afterPath="$PROJECT_DIR$/objs/nginx.8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/ngx_auto_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/objs/ngx_auto_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/ngx_modules.c" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_modules.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/src/core/nginx.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/nginx.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/src/core/ngx_log.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/src/core/ngx_log.o" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +63,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/objs" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="nginx" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c $PROJECT_DIR$/conf/nginx.conf" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nginx" TARGET_NAME="nginx" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/../output1.12/sbin/nginx">
+    <configuration name="nginx" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c $PROJECT_DIR$/conf/nginx.conf" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nginx" TARGET_NAME="nginx" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nginx" RUN_TARGET_NAME="nginx">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -78,7 +97,10 @@
       <workItem from="1641371785633" duration="2185000" />
       <workItem from="1641374359854" duration="769000" />
       <workItem from="1641375136084" duration="581000" />
-      <workItem from="1641375772792" duration="92000" />
+      <workItem from="1641375772792" duration="168000" />
+      <workItem from="1641376225842" duration="5180000" />
+      <workItem from="1641383757683" duration="1042000" />
+      <workItem from="1641456043281" duration="3704000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -101,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641373973018</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="修改list">
+      <created>1641375965554</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1641375965554</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,13 +140,14 @@
     <MESSAGE value="nginx内存池" />
     <MESSAGE value="修改cmakelist.txt" />
     <MESSAGE value="内存池" />
-    <option name="LAST_COMMIT_MESSAGE" value="内存池" />
+    <MESSAGE value="修改list" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改list" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1641375900586">
+    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1641461523216">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.981@0.25.1920.981" timestamp="1641375900586" />
+    <state x="487" y="159" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.981@0.25.1920.981" timestamp="1641461523216" />
     <state x="741" y="226" key="#nginx" timestamp="1641375715758">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
@@ -126,61 +156,65 @@
     </state>
     <state x="710" y="256" key="#nginx-1.12.2/0.25.1920.981@0.25.1920.981" timestamp="1641371498625" />
     <state x="741" y="226" key="#nginx/0.25.1920.981@0.25.1920.981" timestamp="1641375715758" />
-    <state x="616" y="97" key="CommitChangelistDialog2" timestamp="1641373972896">
+    <state x="616" y="97" key="CommitChangelistDialog2" timestamp="1641375965231">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="616" y="97" key="CommitChangelistDialog2/0.25.1920.981@0.25.1920.981" timestamp="1641373972896" />
-    <state width="1796" height="303" key="GridCell.Tab.0.bottom" timestamp="1641375938091">
+    <state x="616" y="97" key="CommitChangelistDialog2/0.25.1920.981@0.25.1920.981" timestamp="1641375965231" />
+    <state width="1541" height="303" key="GridCell.Tab.0.bottom" timestamp="1641461574587">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641375938091" />
-    <state width="1796" height="303" key="GridCell.Tab.0.center" timestamp="1641375938091">
+    <state width="1541" height="303" key="GridCell.Tab.0.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641461574587" />
+    <state width="1541" height="303" key="GridCell.Tab.0.center" timestamp="1641461574587">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.center/0.25.1920.981@0.25.1920.981" timestamp="1641375938091" />
-    <state width="1796" height="303" key="GridCell.Tab.0.left" timestamp="1641375938091">
+    <state width="1541" height="303" key="GridCell.Tab.0.center/0.25.1920.981@0.25.1920.981" timestamp="1641461574587" />
+    <state width="1541" height="303" key="GridCell.Tab.0.left" timestamp="1641461574587">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.left/0.25.1920.981@0.25.1920.981" timestamp="1641375938091" />
-    <state width="1796" height="303" key="GridCell.Tab.0.right" timestamp="1641375938091">
+    <state width="1541" height="303" key="GridCell.Tab.0.left/0.25.1920.981@0.25.1920.981" timestamp="1641461574587" />
+    <state width="1541" height="303" key="GridCell.Tab.0.right" timestamp="1641461574587">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.0.right/0.25.1920.981@0.25.1920.981" timestamp="1641375938091" />
-    <state width="1796" height="303" key="GridCell.Tab.1.bottom" timestamp="1641375938092">
+    <state width="1541" height="303" key="GridCell.Tab.0.right/0.25.1920.981@0.25.1920.981" timestamp="1641461574587" />
+    <state width="1541" height="303" key="GridCell.Tab.1.bottom" timestamp="1641461574588">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641375938092" />
-    <state width="1796" height="303" key="GridCell.Tab.1.center" timestamp="1641375938092">
+    <state width="1541" height="303" key="GridCell.Tab.1.bottom/0.25.1920.981@0.25.1920.981" timestamp="1641461574588" />
+    <state width="1541" height="303" key="GridCell.Tab.1.center" timestamp="1641461574588">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.center/0.25.1920.981@0.25.1920.981" timestamp="1641375938092" />
-    <state width="1796" height="303" key="GridCell.Tab.1.left" timestamp="1641375938091">
+    <state width="1541" height="303" key="GridCell.Tab.1.center/0.25.1920.981@0.25.1920.981" timestamp="1641461574588" />
+    <state width="1541" height="303" key="GridCell.Tab.1.left" timestamp="1641461574588">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.left/0.25.1920.981@0.25.1920.981" timestamp="1641375938091" />
-    <state width="1796" height="303" key="GridCell.Tab.1.right" timestamp="1641375938092">
+    <state width="1541" height="303" key="GridCell.Tab.1.left/0.25.1920.981@0.25.1920.981" timestamp="1641461574588" />
+    <state width="1541" height="303" key="GridCell.Tab.1.right" timestamp="1641461574588">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state width="1796" height="303" key="GridCell.Tab.1.right/0.25.1920.981@0.25.1920.981" timestamp="1641375938092" />
+    <state width="1541" height="303" key="GridCell.Tab.1.right/0.25.1920.981@0.25.1920.981" timestamp="1641461574588" />
     <state x="1061" y="224" key="RollbackChangesDialog" timestamp="1641374234262">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
     <state x="1061" y="224" key="RollbackChangesDialog/0.25.1920.981@0.25.1920.981" timestamp="1641374234262" />
-    <state x="622" y="237" key="Vcs.Push.Dialog.v2" timestamp="1641373974926">
+    <state x="327" y="197" key="SettingsEditor" timestamp="1641457500986">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="622" y="237" key="Vcs.Push.Dialog.v2/0.25.1920.981@0.25.1920.981" timestamp="1641373974926" />
+    <state x="327" y="197" key="SettingsEditor/0.25.1920.981@0.25.1920.981" timestamp="1641457500986" />
+    <state x="622" y="237" key="Vcs.Push.Dialog.v2" timestamp="1641375967028">
+      <screen x="0" y="25" width="1920" height="981" />
+    </state>
+    <state x="622" y="237" key="Vcs.Push.Dialog.v2/0.25.1920.981@0.25.1920.981" timestamp="1641375967028" />
     <state x="680" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1641374360286">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
     <state x="680" y="338" key="com.intellij.ide.util.TipDialog/0.25.1920.981@0.25.1920.981" timestamp="1641374360286" />
-    <state x="689" y="257" width="667" height="486" key="find.popup" timestamp="1641373058664">
+    <state x="689" y="257" width="667" height="486" key="find.popup" timestamp="1641384312210">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="689" y="257" width="667" height="486" key="find.popup/0.25.1920.981@0.25.1920.981" timestamp="1641373058664" />
-    <state x="687" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1639719265614">
+    <state x="689" y="257" width="667" height="486" key="find.popup/0.25.1920.981@0.25.1920.981" timestamp="1641384312210" />
+    <state x="687" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1641461364805">
       <screen x="0" y="25" width="1920" height="981" />
     </state>
-    <state x="687" y="233" width="670" height="676" key="search.everywhere.popup/0.25.1920.981@0.25.1920.981" timestamp="1639719265614" />
+    <state x="687" y="233" width="670" height="676" key="search.everywhere.popup/0.25.1920.981@0.25.1920.981" timestamp="1641461364805" />
   </component>
 </project>
