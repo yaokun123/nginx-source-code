@@ -37,9 +37,9 @@ struct ngx_shm_zone_s {
 
 struct ngx_cycle_s {
     void                  ****conf_ctx;
-    ngx_pool_t               *pool;
+    ngx_pool_t               *pool;             // 内存池
 
-    ngx_log_t                *log;
+    ngx_log_t                *log;              // 日志
     ngx_log_t                 new_log;
 
     ngx_uint_t                log_use_stderr;  /* unsigned  log_use_stderr:1; */
@@ -55,7 +55,7 @@ struct ngx_cycle_s {
     ngx_queue_t               reusable_connections_queue;
     ngx_uint_t                reusable_connections_n;
 
-    ngx_array_t               listening;
+    ngx_array_t               listening;        // 监听套接字相关
     ngx_array_t               paths;
 
     ngx_array_t               config_dump;
@@ -109,7 +109,7 @@ typedef struct {
     ngx_str_t                 working_directory;
     ngx_str_t                 lock_file;
 
-    ngx_str_t                 pid;
+    ngx_str_t                 pid;              // pid文件
     ngx_str_t                 oldpid;
 
     ngx_array_t               env;

@@ -207,13 +207,16 @@ main(int argc, char *const *argv)
         return 1;
     }
 
+    //// 主要用于解析命令行中的参数，例如：./nginx -s stop|start|restart
     if (ngx_get_options(argc, argv) != NGX_OK) {
         return 1;
     }
 
+    //// 是否展示版本配置等信息，上面解析-h/-v/-V的时候会设置ngx_show_version=1
     if (ngx_show_version) {
         ngx_show_version_info();
 
+        //// -t/-T会设置ngx_test_config=1
         if (!ngx_test_config) {
             return 0;
         }
@@ -221,14 +224,17 @@ main(int argc, char *const *argv)
 
     /* TODO */ ngx_max_sockets = -1;
 
+    //// 初始化并更新时间，如全局变量ngx_cached_time
     ngx_time_init();
 
 #if (NGX_PCRE)
     ngx_regex_init();
 #endif
 
+    //// 获取当前进程的pid。一般pid会放在/usr/local/nginx-xxx/nginx.pid的文件中，用于发送重启，关闭等信号命令
     ngx_pid = ngx_getpid();
 
+    //// 初始化日志，并得到日志的文件句柄ngx_log_file.fd，-p会设置ngx_prefix
     log = ngx_log_init(ngx_prefix);
     if (log == NULL) {
         return 1;
@@ -244,6 +250,7 @@ main(int argc, char *const *argv)
      * ngx_process_options()
      */
 
+    //// 初始化init_cycle Nginx的全局变量。在内存池上创建一个默认大小1024的全局变量。这里只是最简单的初始化一个变量。
     ngx_memzero(&init_cycle, sizeof(ngx_cycle_t));
     init_cycle.log = log;
     ngx_cycle = &init_cycle;
@@ -253,14 +260,18 @@ main(int argc, char *const *argv)
         return 1;
     }
 
+    //// 保存Nginx命令行中的参数和变量,放到全局变量ngx_argv
     if (ngx_save_argv(&init_cycle, argc, argv) != NGX_OK) {
         return 1;
     }
 
+    ////  将ngx_get_options中获得这些参数取值赋值到ngx_cycle中。
+    ///   prefix, conf_prefix, conf_file, conf_param等字段
     if (ngx_process_options(&init_cycle) != NGX_OK) {
         return 1;
     }
 
+    //// 初始化系统相关变量，如内存页面大小ngx_pagesize,ngx_cacheline_size,最大连接数ngx_max_sockets等
     if (ngx_os_init(log) != NGX_OK) {
         return 1;
     }
@@ -269,18 +280,22 @@ main(int argc, char *const *argv)
      * ngx_crc32_table_init() requires ngx_cacheline_size set in ngx_os_init()
      */
 
+    //// 初始化一致性hash表，主要作用是加快查询
     if (ngx_crc32_table_init() != NGX_OK) {
         return 1;
     }
 
+    //// 主要是继承了socket的套接字。主要作用是热启动的时候需要平滑过渡
     if (ngx_add_inherited_sockets(&init_cycle) != NGX_OK) {
         return 1;
     }
 
+    //// 主要是前置的初始化模块，对模块进行编号处理
     if (ngx_preinit_modules() != NGX_OK) {
         return 1;
     }
 
+    //// 完成全局变量cycle的初始化
     cycle = ngx_init_cycle(&init_cycle);
     if (cycle == NULL) {
         if (ngx_test_config) {
@@ -317,6 +332,8 @@ main(int argc, char *const *argv)
         return 0;
     }
 
+    //// 如果有信号，则进入ngx_signal_process方法。-s会设置信号
+    //// 例如：例如./nginx -s stop,则处理Nginx的停止信号
     if (ngx_signal) {
         return ngx_signal_process(cycle, ngx_signal);
     }
@@ -325,6 +342,7 @@ main(int argc, char *const *argv)
 
     ngx_cycle = cycle;
 
+    //// 得到核心模块ngx_core_conf_t的配置文件指针
     ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 
     if (ccf->master && ngx_process == NGX_PROCESS_SINGLE) {
@@ -351,6 +369,7 @@ main(int argc, char *const *argv)
 
 #endif
 
+    //// 创建pid文件。例如：/usr/local/nginx-xxx/nginx.pid
     if (ngx_create_pidfile(&ccf->pid, cycle->log) != NGX_OK) {
         return 1;
     }
@@ -372,6 +391,8 @@ main(int argc, char *const *argv)
         ngx_single_process_cycle(cycle);
 
     } else {
+        //// 这函数里面开始真正创建多个Nginx的子进程。
+        ///  这个方法包括子进程创建、事件监听、各种模块运行等都会包含进去
         ngx_master_process_cycle(cycle);
     }
 
@@ -384,6 +405,7 @@ ngx_show_version_info(void)
 {
     ngx_write_stderr("nginx version: " NGINX_VER_BUILD NGX_LINEFEED);
 
+    // -h会设置ngx_show_help=1
     if (ngx_show_help) {
         ngx_write_stderr(
             "Usage: nginx [-?hvVtTq] [-s signal] [-c filename] "
@@ -414,6 +436,7 @@ ngx_show_version_info(void)
         );
     }
 
+    // -V会设置ngx_show_configure=1
     if (ngx_show_configure) {
 
 #ifdef NGX_COMPILER
