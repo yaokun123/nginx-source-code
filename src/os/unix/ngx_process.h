@@ -74,8 +74,8 @@ void ngx_debug_point(void);
 #endif
 
 
-extern int            ngx_argc;
-extern char         **ngx_argv;
+extern int            ngx_argc;     // 命令行参数个数
+extern char         **ngx_argv;     // 命令行参数
 extern char         **ngx_os_argv;
 
 extern ngx_pid_t      ngx_pid;

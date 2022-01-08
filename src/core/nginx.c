@@ -178,14 +178,14 @@ ngx_module_t  ngx_core_module = {
     NGX_MODULE_V1_PADDING
 };
 
-
-static ngx_uint_t   ngx_show_help;
-static ngx_uint_t   ngx_show_version;
-static ngx_uint_t   ngx_show_configure;
-static u_char      *ngx_prefix;
-static u_char      *ngx_conf_file;
-static u_char      *ngx_conf_params;
-static char        *ngx_signal;
+//// 头部的全局变量定义
+static ngx_uint_t   ngx_show_help;      // 是否显示帮助信息
+static ngx_uint_t   ngx_show_version;   // 是否显示版本号
+static ngx_uint_t   ngx_show_configure; // 是否显示配置信息
+static u_char      *ngx_prefix;         // Nginx的工作目录
+static u_char      *ngx_conf_file;      // 全局配置文件目录地址
+static u_char      *ngx_conf_params;    // 配置参数
+static char        *ngx_signal;         // 信号
 
 
 static char **ngx_os_environ;

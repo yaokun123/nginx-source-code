@@ -13,9 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/ngx_cycle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_cycle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +110,7 @@
       <workItem from="1641376225842" duration="5180000" />
       <workItem from="1641383757683" duration="1042000" />
       <workItem from="1641456043281" duration="3704000" />
-      <workItem from="1641604106092" duration="9810000" />
+      <workItem from="1641604106092" duration="10490000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -141,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641375965554</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="主流程">
+      <created>1641640671484</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1641640671484</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +158,8 @@
     <MESSAGE value="修改cmakelist.txt" />
     <MESSAGE value="内存池" />
     <MESSAGE value="修改list" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改list" />
+    <MESSAGE value="主流程" />
+    <option name="LAST_COMMIT_MESSAGE" value="主流程" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
