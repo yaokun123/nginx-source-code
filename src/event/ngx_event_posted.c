@@ -13,7 +13,7 @@
 ngx_queue_t  ngx_posted_accept_events;
 ngx_queue_t  ngx_posted_events;
 
-
+//// 处理事件队列
 void
 ngx_event_process_posted(ngx_cycle_t *cycle, ngx_queue_t *posted)
 {
@@ -30,6 +30,7 @@ ngx_event_process_posted(ngx_cycle_t *cycle, ngx_queue_t *posted)
 
         ngx_delete_posted_event(ev);
 
+        //// 事件回调函数
         ev->handler(ev);
     }
 }

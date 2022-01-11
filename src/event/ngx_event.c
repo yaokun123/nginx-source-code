@@ -226,7 +226,7 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
             ngx_accept_disabled--;
 
         } else {
-            //// 获取锁失败
+            //// 获取accept锁
             if (ngx_trylock_accept_mutex(cycle) == NGX_ERROR) {
                 return;
             }
@@ -257,6 +257,13 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 
     delta = ngx_current_msec;
 
+    /**
+	 * 事件调度函数
+	 * 1. 当拿到锁，flags=NGX_POST_EVENTS的时候，不会直接处理事件，
+	 * 将accept事件放到ngx_posted_accept_events，read事件放到ngx_posted_events队列
+	 * 2. 当没有拿到锁，则处理的全部是read事件，直接进行回调函数处理
+	 * 参数：timer-epoll_wait超时时间  (ngx_accept_mutex_delay-延迟拿锁事件   NGX_TIMER_INFINITE-正常的epollwait等待事件)
+	 */
     (void) ngx_process_events(cycle, timer, flags);
 
     delta = ngx_current_msec - delta;
@@ -264,8 +271,13 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
                    "timer delta: %M", delta);
 
+    /**
+	 * 1. ngx_posted_accept_events是一个事件队列，暂存epoll从监听套接口wait到的accept事件
+	 * 2. 这个方法是循环处理accpet事件列队上的accpet事件
+	 */
     ngx_event_process_posted(cycle, &ngx_posted_accept_events);
 
+    //// 如果拿到锁，处理完accept事件后，则释放锁
     if (ngx_accept_mutex_held) {
         ngx_shmtx_unlock(&ngx_accept_mutex);
     }
@@ -274,6 +286,10 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
         ngx_event_expire_timers();
     }
 
+    /**
+	 *1. 普通事件都会存放在ngx_posted_events队列上
+	 *2. 这个方法是循环处理read事件列队上的read事件
+	 */
     ngx_event_process_posted(cycle, &ngx_posted_events);
 }
 
