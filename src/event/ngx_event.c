@@ -189,7 +189,7 @@ ngx_module_t  ngx_event_core_module = {
     NGX_MODULE_V1_PADDING
 };
 
-
+//// 进程事件分发器
 void
 ngx_process_events_and_timers(ngx_cycle_t *cycle)
 {
@@ -215,19 +215,37 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 #endif
     }
 
+    //// ngx_use_accept_mutex变量代表是否使用accept互斥体。默认是使用，可以通过accept_mutex off;指令关闭；
+    //// accept_mutex的作用就是避免惊群，同时实现负载均衡
     if (ngx_use_accept_mutex) {
+
+        //// ngx_accept_disabled = ngx_cycle->connection_n / 8 - ngx_cycle->free_connection_n;
+        //// 当connection达到连接总数的7/8的时候，就不再处理新的连接accept事件，只处理当前连接的read事件
+        //// 这个是比较简单的一种负载均衡方法
         if (ngx_accept_disabled > 0) {
             ngx_accept_disabled--;
 
         } else {
+            //// 获取锁失败
             if (ngx_trylock_accept_mutex(cycle) == NGX_ERROR) {
                 return;
             }
 
+            //// 拿到锁
             if (ngx_accept_mutex_held) {
+                //// 给flags增加标记NGX_POST_EVENTS，这个标记作为处理时间核心函数ngx_process_events的一个参数，这个函数中所有事件将延后处理。
+                //// accept事件都放到ngx_posted_accept_events链表中
+                //// epollin|epollout普通事件都放到ngx_posted_events链表中
                 flags |= NGX_POST_EVENTS;
 
             } else {
+                /**
+				 * 1. 获取锁失败，意味着既不能让当前worker进程频繁的试图抢锁，也不能让它经过太长事件再去抢锁
+				 * 2. 开启了timer_resolution时间精度，需要让ngx_process_change方法在没有新事件的时候至少等待ngx_accept_mutex_delay毫秒之后再去试图抢锁
+				 * 3. 没有开启时间精度时，如果最近一个定时器事件的超时时间距离现在超过了ngx_accept_mutex_delay毫秒，也要把timer设置为ngx_accept_mutex_delay毫秒
+				 * 4. 不能让ngx_process_change方法在没有新事件的时候等待的时间超过ngx_accept_mutex_delay，这会影响整个负载均衡机制
+				 * 5. 如果拿到锁的进程能很快处理完accpet，而没拿到锁的一直在等待，容易造成进程忙的很忙，空的很空
+				 */
                 if (timer == NGX_TIMER_INFINITE
                     || timer > ngx_accept_mutex_delay)
                 {

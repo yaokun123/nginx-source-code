@@ -1,3 +1,32 @@
+Linux2.6版本之前还存在对于socket的accept的惊群现象。之后的版本已经解决掉了这个问题。
 
-Documentation is available at http://nginx.org
+惊群是指多个进程/线程在等待同一资源时，每当资源可用，所有的进程/线程都来竞争资源的现象。
+Nginx采用的是多进程的模式。假设Linux系统是2.6版本以前，当有一个客户端要连到Nginx服务器上，
+Nginx的N个进程都会去监听socket的accept的，如果全部的N个进程都对这个客户端的socket连接进行了监听，
+就会造成资源的竞争甚至数据的错乱。我们要保证的是，一个链接在Nginx的一个进程上处理，包括accept和read/write事件。
+
+
+Nginx解决惊群和进程负载均衡处理的要点：
+1、Nginx的N个进程会争抢文件锁，当只有拿到文件锁的进程，才能处理accept的事件。
+2、没有拿到文件锁的进程，只能处理当前连接对象的read事件
+3、当单个进程总的connection连接数达到总数的7/8的时候，就不会再接收新的accpet事件。
+4、如果拿到锁的进程能很快处理完accpet，而没拿到锁的一直在等待（等待时延：ngx_accept_mutex_delay），容易造成进程忙的很忙，空的很空
+
+
+具体的实现：
+ngx_process_events_and_timers 进程事件分发器。
+此方法为进程实现的核心函数。主要作用：事件分发；惊群处理；简单的负载均衡。
+
+负载均衡：
+1、当事件配置初始化的时候，会设置一个全局变量：ngx_accept_disabled = ngx_cycle->connection_n / 8 - ngx_cycle->free_connection_n;
+2、当ngx_accept_disabled为正数的时候，connection达到连接总数的7/8的时候，就不再处理新的连接accept事件，只处理当前连接的read事件
+
+惊群处理：
+1、通过ngx_trylock_accept_mutex争抢文件锁，拿到文件锁的，才可以处理accept事件。
+2、ngx_accept_mutex_held是拿到锁的一个标志，当拿到锁了，flags会被设置成NGX_POST_EVENTS，这个标志会在事件处理函数
+ngx_process_events中将所有事件（accept和read）放入对应的ngx_posted_accept_events和ngx_posted_events队列中进行延后处理
+3、当没有拿到锁，调用事件处理函数ngx_process_events的时候，可以明确都是read的事件，所以可以直接调用事件ev->handler方法回调处理
+4、拿到锁的进程，接下来会优先处理ngx_posted_accept_events队列上的accept事件，处理函数：ngx_event_process_posted
+5、处理完accept事件后，就将文件锁释放
+6、接下来处理ngx_posted_events队列上的read事件，处理函数：ngx_event_process_posted
 

@@ -12,7 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641891072253</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="ngx_worker_process_init工作进程初始化">
+      <created>1641891293128</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1641891293128</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +286,8 @@
     <MESSAGE value="ngx_start_worker_processes创建工作进程" />
     <MESSAGE value="ngx_spawn_process fork创建子进程" />
     <MESSAGE value="ngx_worker_process_cycle 子进程循环" />
-    <option name="LAST_COMMIT_MESSAGE" value="ngx_worker_process_cycle 子进程循环" />
+    <MESSAGE value="ngx_worker_process_init工作进程初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_worker_process_init工作进程初始化" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
