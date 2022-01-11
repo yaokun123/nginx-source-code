@@ -739,7 +739,7 @@ ngx_master_process_exit(ngx_cycle_t *cycle)
     exit(0);
 }
 
-
+//// 子进程 回调函数（每个进程的逻辑处理就从这个方法开始）
 static void
 ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
 {
@@ -748,12 +748,15 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
     ngx_process = NGX_PROCESS_WORKER;
     ngx_worker = worker;
 
+    //// 工作进程初始化
     ngx_worker_process_init(cycle, worker);
 
-    ngx_setproctitle("worker process");
+    ngx_setproctitle("worker process"); // 设置title
 
+    //// worker进程循环
     for ( ;; ) {
 
+        //// 判断是否是退出的状态，如果退出，则需要清空socket连接句柄
         if (ngx_exiting) {
             if (ngx_event_no_timers_left() == NGX_OK) {
                 ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "exiting");
@@ -763,6 +766,7 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
 
         ngx_log_debug0(NGX_LOG_DEBUG_EVENT, cycle->log, 0, "worker cycle");
 
+        //// 事件驱动核心函数
         ngx_process_events_and_timers(cycle);
 
         if (ngx_terminate) {
@@ -770,6 +774,7 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
             ngx_worker_process_exit(cycle);
         }
 
+        //// 如果是退出
         if (ngx_quit) {
             ngx_quit = 0;
             ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
@@ -784,6 +789,7 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
             }
         }
 
+        //// 如果是重启
         if (ngx_reopen) {
             ngx_reopen = 0;
             ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "reopening logs");
