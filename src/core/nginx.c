@@ -397,8 +397,8 @@ main(int argc, char *const *argv)
         ngx_single_process_cycle(cycle);
 
     } else {
-        //// 这函数里面开始真正创建多个Nginx的子进程。
-        ///  这个方法包括子进程创建、事件监听、各种模块运行等都会包含进去
+        //// 主进程进行信号的监听和处理
+        //// 开启子进程
         ngx_master_process_cycle(cycle);
     }
 

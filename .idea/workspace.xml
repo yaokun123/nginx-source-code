@@ -14,7 +14,7 @@
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/ngx_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_cycle.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641879996682</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="cycle全局变量初始化">
+      <created>1641881311085</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1641881311085</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +246,8 @@
     <MESSAGE value="ngx_signal_handler信号处理函数只设置全局变量，没有做具体操作。" />
     <MESSAGE value="ngx_os_signal_process" />
     <MESSAGE value="ngx_cycle_t结构体" />
-    <option name="LAST_COMMIT_MESSAGE" value="ngx_cycle_t结构体" />
+    <MESSAGE value="cycle全局变量初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="cycle全局变量初始化" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
