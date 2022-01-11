@@ -339,6 +339,7 @@ main(int argc, char *const *argv)
 
     //// 如果有信号，则进入ngx_signal_process方法。-s会设置信号，ngx_signal变量是在ngx_get_options方法中
     //// 例如：例如./nginx -s stop,则处理Nginx的停止信号
+    // 给主进程发送信号，则直接处理信号就行，不是启动nginx
     if (ngx_signal) {
         return ngx_signal_process(cycle, ngx_signal);
     }
@@ -762,17 +763,19 @@ ngx_exec_new_binary(ngx_cycle_t *cycle, char *const *argv)
     return pid;
 }
 
-
+//// 解析命令行参数
 static ngx_int_t
 ngx_get_options(int argc, char *const *argv)
 {
     u_char     *p;
     ngx_int_t   i;
 
+    // 遍历每个参数./nginx -abc
     for (i = 1; i < argc; i++) {
 
         p = (u_char *) argv[i];
 
+        // 命令行参数要以-开头
         if (*p++ != '-') {
             ngx_log_stderr(0, "invalid option: \"%s\"", argv[i]);
             return NGX_ERROR;
@@ -866,6 +869,7 @@ ngx_get_options(int argc, char *const *argv)
                     return NGX_ERROR;
                 }
 
+                // 判断需要发送的信号
                 if (ngx_strcmp(ngx_signal, "stop") == 0
                     || ngx_strcmp(ngx_signal, "quit") == 0
                     || ngx_strcmp(ngx_signal, "reopen") == 0

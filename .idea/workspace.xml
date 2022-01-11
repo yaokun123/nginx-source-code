@@ -13,9 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_accept.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_accept.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_posted.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_posted.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641892234133</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="ngx_process_events_and_timers进程事件分发器">
+      <created>1641894482357</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1641894482357</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
