@@ -811,11 +811,13 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     ngx_core_conf_t  *ccf;
     ngx_listening_t  *ls;
 
+    //// 配置环境变量
     if (ngx_set_environment(cycle, NULL) == NULL) {
         /* fatal */
         exit(2);
     }
 
+    //// 获取核心配置
     ccf = (ngx_core_conf_t *) ngx_get_conf(cycle->conf_ctx, ngx_core_module);
 
     if (worker >= 0 && ccf->priority != 0) {
@@ -847,6 +849,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
         }
     }
 
+    //// 设置UID GROUPUID
     if (geteuid() == 0) {
         if (setgid(ccf->group) == -1) {
             ngx_log_error(NGX_LOG_EMERG, cycle->log, ngx_errno,
@@ -869,6 +872,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
         }
     }
 
+    //// 设置CPU亲和性
     if (worker >= 0) {
         cpu_affinity = ngx_get_cpu_affinity(worker);
 
@@ -888,6 +892,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
 
 #endif
 
+    //// 切换工作目录
     if (ccf->working_directory.len) {
         if (chdir((char *) ccf->working_directory.data) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
@@ -899,6 +904,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
 
     sigemptyset(&set);
 
+    //// 清除所有信号
     if (sigprocmask(SIG_SETMASK, &set, NULL) == -1) {
         ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                       "sigprocmask() failed");
@@ -911,11 +917,13 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
      * disable deleting previous events for the listening sockets because
      * in the worker processes there are no events at all at this point
      */
+    //// 清除sokcet的监听
     ls = cycle->listening.elts;
     for (i = 0; i < cycle->listening.nelts; i++) {
         ls[i].previous = NULL;
     }
 
+    //// 对模块初始化
     for (i = 0; cycle->modules[i]; i++) {
         if (cycle->modules[i]->init_process) {
             if (cycle->modules[i]->init_process(cycle) == NGX_ERROR) {
@@ -925,6 +933,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
         }
     }
 
+    //// 将其他进程的channel[1]关闭，自己的channel[0]关闭
     for (n = 0; n < ngx_last_process; n++) {
 
         if (ngx_processes[n].pid == -1) {
@@ -954,6 +963,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     ngx_last_process = 0;
 #endif
 
+    //// 给ngx_channel注册一个读事件处理函数
     if (ngx_add_channel_event(cycle, ngx_channel, NGX_READ_EVENT,
                               ngx_channel_handler)
         == NGX_ERROR)

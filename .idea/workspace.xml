@@ -11,7 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="" />
+    <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641890564213</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ngx_worker_process_cycle 子进程循环">
+      <created>1641891072253</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1641891072253</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +276,8 @@
     <MESSAGE value="ngx_master_process_cycle创建子进程worker，master循环监听" />
     <MESSAGE value="ngx_start_worker_processes创建工作进程" />
     <MESSAGE value="ngx_spawn_process fork创建子进程" />
-    <option name="LAST_COMMIT_MESSAGE" value="ngx_spawn_process fork创建子进程" />
+    <MESSAGE value="ngx_worker_process_cycle 子进程循环" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_worker_process_cycle 子进程循环" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
