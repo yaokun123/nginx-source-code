@@ -13,7 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/ngx_cycle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_cycle.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +196,21 @@
       <option name="project" value="LOCAL" />
       <updated>1641878189722</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="ngx_signal_handler信号处理函数只设置全局变量，没有做具体操作。">
+      <created>1641879237467</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1641879237467</updated>
+    </task>
+    <task id="LOCAL-00013" summary="ngx_os_signal_process">
+      <created>1641879475134</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1641879475134</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +228,9 @@
     <MESSAGE value="ngx_signal_process从pid文件中获取master进程id好，信号预处理" />
     <MESSAGE value="ngx_os_signal_process调用系统函数发送信号" />
     <MESSAGE value="ngx_init_signals初始化信号处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="ngx_init_signals初始化信号处理" />
+    <MESSAGE value="ngx_signal_handler信号处理函数只设置全局变量，没有做具体操作。" />
+    <MESSAGE value="ngx_os_signal_process" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_os_signal_process" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
