@@ -356,6 +356,7 @@ main(int argc, char *const *argv)
 
 #if !(NGX_WIN32)
 
+    //// 初始化信号处理
     if (ngx_init_signals(cycle->log) != NGX_OK) {
         return 1;
     }

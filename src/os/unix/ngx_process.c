@@ -286,10 +286,13 @@ ngx_init_signals(ngx_log_t *log)
     ngx_signal_t      *sig;
     struct sigaction   sa;
 
+    //// 循环signals数组
     for (sig = signals; sig->signo != 0; sig++) {
         ngx_memzero(&sa, sizeof(struct sigaction));
         sa.sa_handler = sig->handler;
         sigemptyset(&sa.sa_mask);
+
+        //// 注册信号处理函数
         if (sigaction(sig->signo, &sa, NULL) == -1) {
 #if (NGX_VALGRIND)
             ngx_log_error(NGX_LOG_ALERT, log, ngx_errno,
