@@ -286,6 +286,11 @@ main(int argc, char *const *argv)
     }
 
     //// 主要是继承了socket的套接字。主要作用是热启动的时候需要平滑过渡
+    //// 初始化socket端口监听，例如打开80端口监听
+    //// Nginx支持热切换，为了保证切换之后的套接字不丢失，所以需要采用这一步添加继承的Socket套接字，套接字会放在NGINX的全局环境变量中
+    //// 函数通过环境变量NGINX完成socket的继承，继承来的socket将会放到init_cycle的listening数组中。
+    //// 在NGINX环境变量中，每个socket中间用冒号或分号隔开。完成继承同时设置全局变量ngx_inherited为1
+    //// NGINX宏变量的值，值为客户端的socket fd句柄：NGINX="16000:16500:16600;"
     if (ngx_add_inherited_sockets(&init_cycle) != NGX_OK) {
         return 1;
     }
@@ -471,7 +476,8 @@ ngx_add_inherited_sockets(ngx_cycle_t *cycle)
     ngx_int_t         s;
     ngx_listening_t  *ls;
 
-    inherited = (u_char *) getenv(NGINX_VAR);
+    //// 获取宏环境变量NGINX的值    例如：# export NGINX="16000:16500:16600;"
+    inherited = (u_char *) getenv(NGINX_VAR);   // NGINX_VAR = "NGINX"      inherited（继承）
 
     if (inherited == NULL) {
         return NGX_OK;
@@ -480,6 +486,7 @@ ngx_add_inherited_sockets(ngx_cycle_t *cycle)
     ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0,
                   "using inherited sockets from \"%s\"", inherited);
 
+    //// 初始化ngx_cycle.listening数组，并且数组中包含10个元素
     if (ngx_array_init(&cycle->listening, cycle->pool, 10,
                        sizeof(ngx_listening_t))
         != NGX_OK)
@@ -507,7 +514,7 @@ ngx_add_inherited_sockets(ngx_cycle_t *cycle)
 
             ngx_memzero(ls, sizeof(ngx_listening_t));
 
-            ls->fd = (ngx_socket_t) s;
+            ls->fd = (ngx_socket_t) s;      // 将fd保存到ngx_listening_t结构数组上
         }
     }
 
@@ -517,6 +524,7 @@ ngx_add_inherited_sockets(ngx_cycle_t *cycle)
                       " environment variable, ignoring", v);
     }
 
+    //// 已经初始化要继承的socke
     ngx_inherited = 1;
 
     return ngx_set_inherited_sockets(cycle);
