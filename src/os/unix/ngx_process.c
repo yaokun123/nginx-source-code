@@ -183,6 +183,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     ngx_process_slot = s;
 
 
+    //// fork 一个子进程
     pid = fork();
 
     switch (pid) {
@@ -194,11 +195,14 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
         return NGX_INVALID_PID;
 
     case 0:
+        //// child
+        //// 如果pid fork成功，则调用 ngx_worker_process_cycle方法,一切子进程的工作从这个方法开始
         ngx_pid = ngx_getpid();
         proc(cycle, data);
         break;
 
     default:
+        //// parent
         break;
     }
 
