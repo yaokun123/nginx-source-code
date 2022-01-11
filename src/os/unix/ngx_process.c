@@ -308,7 +308,7 @@ ngx_init_signals(ngx_log_t *log)
     return NGX_OK;
 }
 
-
+//// 信号处理函数
 static void
 ngx_signal_handler(int signo)
 {
@@ -321,6 +321,7 @@ ngx_signal_handler(int signo)
 
     err = ngx_errno;
 
+    //// 检查是哪种信号
     for (sig = signals; sig->signo != 0; sig++) {
         if (sig->signo == signo) {
             break;
@@ -335,37 +336,40 @@ ngx_signal_handler(int signo)
 
     case NGX_PROCESS_MASTER:
     case NGX_PROCESS_SINGLE:
+        //// master进程和前端进程身份
         switch (signo) {
 
-        case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
+        case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):         // quit
             ngx_quit = 1;
             action = ", shutting down";
             break;
 
-        case ngx_signal_value(NGX_TERMINATE_SIGNAL):
+        case ngx_signal_value(NGX_TERMINATE_SIGNAL):        // stop
         case SIGINT:
             ngx_terminate = 1;
             action = ", exiting";
             break;
 
-        case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
+        case ngx_signal_value(NGX_NOACCEPT_SIGNAL):         // ""
             if (ngx_daemonized) {
                 ngx_noaccept = 1;
                 action = ", stop accepting connections";
             }
             break;
 
-        case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):
+        case ngx_signal_value(NGX_RECONFIGURE_SIGNAL):      // reload（重点）
+            // 信号处理函数只设置了全局变量ngx_reconfigure和action，不做其他具体操作
+            // 在master进程的主循环中，调用ngx_master_process_cycle函数，做具体操作
             ngx_reconfigure = 1;
             action = ", reconfiguring";
             break;
 
-        case ngx_signal_value(NGX_REOPEN_SIGNAL):
+        case ngx_signal_value(NGX_REOPEN_SIGNAL):           // reopen
             ngx_reopen = 1;
             action = ", reopening logs";
             break;
 
-        case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):
+        case ngx_signal_value(NGX_CHANGEBIN_SIGNAL):        // ""
             if (getppid() > 1 || ngx_new_binary > 0) {
 
                 /*
@@ -401,6 +405,7 @@ ngx_signal_handler(int signo)
 
     case NGX_PROCESS_WORKER:
     case NGX_PROCESS_HELPER:
+        //// worker进程和help身份
         switch (signo) {
 
         case ngx_signal_value(NGX_NOACCEPT_SIGNAL):
