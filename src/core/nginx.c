@@ -300,7 +300,7 @@ main(int argc, char *const *argv)
         return 1;
     }
 
-    //// 完成全局变量cycle的初始化
+    //// 完成全局变量cycle的初始化 ngx_cycle = cycle
     cycle = ngx_init_cycle(&init_cycle);
     if (cycle == NULL) {
         if (ngx_test_config) {
