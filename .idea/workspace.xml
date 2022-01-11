@@ -12,8 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -225,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641881311085</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ngx_master_process_cycle创建子进程worker，master循环监听">
+      <created>1641890047336</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1641890047336</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +252,8 @@
     <MESSAGE value="ngx_os_signal_process" />
     <MESSAGE value="ngx_cycle_t结构体" />
     <MESSAGE value="cycle全局变量初始化" />
-    <option name="LAST_COMMIT_MESSAGE" value="cycle全局变量初始化" />
+    <MESSAGE value="ngx_master_process_cycle创建子进程worker，master循环监听" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_master_process_cycle创建子进程worker，master循环监听" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

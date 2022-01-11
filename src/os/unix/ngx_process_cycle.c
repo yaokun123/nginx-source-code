@@ -368,8 +368,10 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
 
     ch.command = NGX_CMD_OPEN_CHANNEL;
 
+    //// 循环创建工作进程
     for (i = 0; i < n; i++) {
 
+        //// 打开工作进程  （ngx_worker_process_cycle 回调函数，主要用于处理每个工作线程）
         ngx_spawn_process(cycle, ngx_worker_process_cycle,
                           (void *) (intptr_t) i, "worker process", type);
 
