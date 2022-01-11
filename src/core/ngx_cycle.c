@@ -1010,6 +1010,7 @@ ngx_signal_process(ngx_cycle_t *cycle, char *sig)
     file.name = ccf->pid;
     file.log = cycle->log;
 
+    //// 打开pid文件，获取文件描述符
     file.fd = ngx_open_file(file.name.data, NGX_FILE_RDONLY,
                             NGX_FILE_OPEN, NGX_FILE_DEFAULT_ACCESS);
 
@@ -1019,8 +1020,10 @@ ngx_signal_process(ngx_cycle_t *cycle, char *sig)
         return 1;
     }
 
+    //// 读取pid文件
     n = ngx_read_file(&file, buf, NGX_INT64_LEN + 2, 0);
 
+    //// 关闭文件描述符
     if (ngx_close_file(file.fd) == NGX_FILE_ERROR) {
         ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                       ngx_close_file_n " \"%s\" failed", file.name.data);
@@ -1032,6 +1035,7 @@ ngx_signal_process(ngx_cycle_t *cycle, char *sig)
 
     while (n-- && (buf[n] == CR || buf[n] == LF)) { /* void */ }
 
+    //// 最终得到PID
     pid = ngx_atoi(buf, ++n);
 
     if (pid == (ngx_pid_t) NGX_ERROR) {
@@ -1041,6 +1045,7 @@ ngx_signal_process(ngx_cycle_t *cycle, char *sig)
         return 1;
     }
 
+    //// 处理真正的信号
     return ngx_os_signal_process(cycle, sig, pid);
 
 }
