@@ -337,7 +337,7 @@ main(int argc, char *const *argv)
         return 0;
     }
 
-    //// 如果有信号，则进入ngx_signal_process方法。-s会设置信号
+    //// 如果有信号，则进入ngx_signal_process方法。-s会设置信号，ngx_signal变量是在ngx_get_options方法中
     //// 例如：例如./nginx -s stop,则处理Nginx的停止信号
     if (ngx_signal) {
         return ngx_signal_process(cycle, ngx_signal);
@@ -852,6 +852,8 @@ ngx_get_options(int argc, char *const *argv)
                 return NGX_ERROR;
 
             case 's':
+                //// ngx_signal 是否有信号  ./nginx -s stop|reload|quit
+
                 if (*p) {
                     ngx_signal = (char *) p;
 
