@@ -1045,7 +1045,7 @@ ngx_signal_process(ngx_cycle_t *cycle, char *sig)
         return 1;
     }
 
-    //// 处理真正的信号
+    //// 系统调用，向一个进程发送信号
     return ngx_os_signal_process(cycle, sig, pid);
 
 }
