@@ -283,6 +283,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
     }
 
     //// 解析配置文件/usr/local/nginx/conf/nginx.conf 信息
+    //// 根据配置文件中监听的端口不同，设置cycle.listening.elts结构体数组及cycle.listening.nelts个数
     if (ngx_conf_parse(&conf, &cycle->conf_file) != NGX_CONF_OK) {
         environ = senv;
         ngx_destroy_cycle_pools(&conf);
@@ -604,6 +605,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
         }
 
     } else {
+        //// 遍历需要监听的端口个数，将cycle->listening.elts结构体数组中元素的open字段设置为1
         ls = cycle->listening.elts;
         for (i = 0; i < cycle->listening.nelts; i++) {
             ls[i].open = 1;
@@ -619,7 +621,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
 #endif
         }
     }
-
+    //// 开始创建socket，此时cycle->listening.elts结构体数组中的元素fd字段会被设置（就是服务端监听的被动套接字）
     if (ngx_open_listening_sockets(cycle) != NGX_OK) {
         goto failed;
     }
