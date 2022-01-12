@@ -282,6 +282,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
         return NULL;
     }
 
+    //// socket参数的解析（预初始化）
     //// 解析配置文件/usr/local/nginx/conf/nginx.conf 信息
     //// 根据配置文件中监听的端口不同，设置cycle.listening.elts结构体数组及cycle.listening.nelts个数
     if (ngx_conf_parse(&conf, &cycle->conf_file) != NGX_CONF_OK) {
@@ -508,6 +509,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
 
 
     /* handle the listening sockets */
+    //// socket初始化
     //// 处理listening数组，并开始监听socket
     if (old_cycle->listening.nelts) {
         ls = old_cycle->listening.elts;
