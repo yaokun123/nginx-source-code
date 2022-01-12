@@ -437,10 +437,12 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
             }
 #endif
 
+            //// 被动套接字如果被初始化fd != 1，此时就不再重复初始化了
             if (ls[i].fd != (ngx_socket_t) -1) {
                 continue;
             }
 
+            //// inherited（继承）
             if (ls[i].inherited) {
 
                 /* TODO: close on exit */
@@ -450,6 +452,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
                 continue;
             }
 
+            //// 1、ngx_socket = socket ，创建服务端的套接字
             s = ngx_socket(ls[i].sockaddr->sa_family, ls[i].type, 0);
 
             if (s == (ngx_socket_t) -1) {
@@ -458,6 +461,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
                 return NGX_ERROR;
             }
 
+            //// 设置服务端套接字选项 -地址复用（解决服务端挂掉客户端没有挂掉，服务端无法重启）
             if (setsockopt(s, SOL_SOCKET, SO_REUSEADDR,
                            (const void *) &reuseaddr, sizeof(int))
                 == -1)
@@ -503,6 +507,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
 
 #if (NGX_HAVE_INET6 && defined IPV6_V6ONLY)
 
+            //// ipv6
             if (ls[i].sockaddr->sa_family == AF_INET6) {
                 int  ipv6only;
 
@@ -521,6 +526,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
             /* TODO: close on exit */
 
             if (!(ngx_event_flags & NGX_USE_IOCP_EVENT)) {
+                //// 设置服务端套接字为非阻塞
                 if (ngx_nonblocking(s) == -1) {
                     ngx_log_error(NGX_LOG_EMERG, log, ngx_socket_errno,
                                   ngx_nonblocking_n " %V failed",
@@ -539,6 +545,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
             ngx_log_debug2(NGX_LOG_DEBUG_CORE, log, 0,
                            "bind() %V #%d ", &ls[i].addr_text, s);
 
+            //// 2、服务端套接字绑定端口
             if (bind(s, ls[i].sockaddr, ls[i].socklen) == -1) {
                 err = ngx_socket_errno;
 
@@ -566,6 +573,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
 
 #if (NGX_HAVE_UNIX_DOMAIN)
 
+            //// unix socket相关
             if (ls[i].sockaddr->sa_family == AF_UNIX) {
                 mode_t   mode;
                 u_char  *name;
@@ -587,11 +595,14 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
             }
 #endif
 
+            //// 如果不是TCP到这里就结束了。
             if (ls[i].type != SOCK_STREAM) {
                 ls[i].fd = s;
                 continue;
             }
 
+            /// 3、监听    一旦调用了listen函数，这个套接字将会变成被动套接字（只能接受连接不能发送连接）
+            //// 内核要维护两个队列：已完成连接队列、未完成连接队列
             if (listen(s, ls[i].backlog) == -1) {
                 err = ngx_socket_errno;
 
@@ -624,9 +635,10 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
                 continue;
             }
 
-            ls[i].listen = 1;
+            ls[i].listen = 1;       // 标记此时已经初始化该服务端套接字了
 
-            ls[i].fd = s;
+            ls[i].fd = s;           // 将套接字赋值给fd
+            //// 至此一轮初始化套接字结束，循环进行下一轮的套接字初始化
         }
 
         if (!failed) {
