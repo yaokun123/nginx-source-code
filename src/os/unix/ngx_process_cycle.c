@@ -183,6 +183,7 @@ ngx_master_process_cycle(ngx_cycle_t *cycle)
         }
 
         if (!live && (ngx_terminate || ngx_quit)) {
+            //// 回收完子进程后主进程也退出。至此nginx结束
             ngx_master_process_exit(cycle);
         }
 
