@@ -226,16 +226,17 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
             ngx_accept_disabled--;
 
         } else {
-            //// 获取accept锁
+            //// 获取accept锁，获取失败直接返回
             if (ngx_trylock_accept_mutex(cycle) == NGX_ERROR) {
                 return;
             }
 
-            //// 拿到锁
+            //// ngx_accept_mutex_held是拿到锁的一个标志，当拿到锁了，flags会被设置成NGX_POST_EVENTS
+            //// 这个标志会在事件处理函数ngx_process_events中将所有事件（accept和read）放入对应的ngx_posted_accept_events和ngx_posted_events队列中进行延后处理。
+            //// 给flags增加标记NGX_POST_EVENTS，这个标记作为处理时间核心函数ngx_process_events的一个参数，这个函数中所有事件将延后处理。
+            //// accept事件都放到ngx_posted_accept_events链表中
+            //// epollin|epollout普通事件都放到ngx_posted_events链表中
             if (ngx_accept_mutex_held) {
-                //// 给flags增加标记NGX_POST_EVENTS，这个标记作为处理时间核心函数ngx_process_events的一个参数，这个函数中所有事件将延后处理。
-                //// accept事件都放到ngx_posted_accept_events链表中
-                //// epollin|epollout普通事件都放到ngx_posted_events链表中
                 flags |= NGX_POST_EVENTS;
 
             } else {
@@ -259,8 +260,7 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 
     /**
 	 * 事件调度函数
-	 * 1. 当拿到锁，flags=NGX_POST_EVENTS的时候，不会直接处理事件，
-	 * 将accept事件放到ngx_posted_accept_events，read事件放到ngx_posted_events队列
+	 * 1. 当拿到锁，flags=NGX_POST_EVENTS的时候，不会直接处理事件，将accept事件放到ngx_posted_accept_events，read事件放到ngx_posted_events队列
 	 * 2. 当没有拿到锁，则处理的全部是read事件，直接进行回调函数处理
 	 * 参数：timer-epoll_wait超时时间  (ngx_accept_mutex_delay-延迟拿锁事件   NGX_TIMER_INFINITE-正常的epollwait等待事件)
 	 */
