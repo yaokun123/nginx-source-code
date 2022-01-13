@@ -13,9 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_accept.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_accept.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/ngx_connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_connection.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +118,7 @@
       <workItem from="1641604106092" duration="10490000" />
       <workItem from="1641979352076" duration="1414000" />
       <workItem from="1641980940425" duration="5039000" />
-      <workItem from="1641986753068" duration="17547000" />
+      <workItem from="1641986753068" duration="18947000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -353,14 +351,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642058991501</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="ngx_process_events对应的epoll函数为ngx_epoll_process_events">
+      <created>1642062354677</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1642062354677</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="idea" />
     <MESSAGE value="ngx_add_inherited_sockets继承套接字" />
     <MESSAGE value="ngx_get_options解析信号" />
     <MESSAGE value="ngx_signal_process从pid文件中获取master进程id好，信号预处理" />
@@ -385,18 +389,10 @@
     <MESSAGE value="父子进程通信" />
     <MESSAGE value="fork worker" />
     <MESSAGE value="事件主流程" />
-    <option name="LAST_COMMIT_MESSAGE" value="事件主流程" />
+    <MESSAGE value="ngx_process_events对应的epoll函数为ngx_epoll_process_events" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_process_events对应的epoll函数为ngx_epoll_process_events" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/core/nginx.c</url>
-          <line>405</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="ccf-&gt;pid.data" />

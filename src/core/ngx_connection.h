@@ -15,19 +15,20 @@
 
 typedef struct ngx_listening_s  ngx_listening_t;
 
+//// socket侦听结构
 struct ngx_listening_s {
-    ngx_socket_t        fd;
+    ngx_socket_t        fd;                     // 文件描述符,即socket，服务端套接字
 
-    struct sockaddr    *sockaddr;
-    socklen_t           socklen;    /* size of sockaddr */
-    size_t              addr_text_max_len;
+    struct sockaddr    *sockaddr;               // socket地址
+    socklen_t           socklen;                // size of sockaddr
+    size_t              addr_text_max_len;      //
     ngx_str_t           addr_text;
 
     int                 type;
 
-    int                 backlog;
-    int                 rcvbuf;
-    int                 sndbuf;
+    int                 backlog;                // 日志
+    int                 rcvbuf;                 // 数据接收buffer
+    int                 sndbuf;                 // 数据发送的buffer
 #if (NGX_HAVE_KEEPALIVE_TUNABLE)
     int                 keepidle;
     int                 keepintvl;
@@ -35,9 +36,9 @@ struct ngx_listening_s {
 #endif
 
     /* handler of accepted connection */
-    ngx_connection_handler_pt   handler;
+    ngx_connection_handler_pt   handler;        // 接收连接后的回调函数，回调方法：ngx_http_init_connection
 
-    void               *servers;  /* array of ngx_http_in_addr_t, for example */
+    void               *servers;                // array of ngx_http_in_addr_t, for example
 
     ngx_log_t           log;
     ngx_log_t          *logp;
@@ -48,19 +49,19 @@ struct ngx_listening_s {
     /* should be here because of the deferred accept */
     ngx_msec_t          post_accept_timeout;
 
-    ngx_listening_t    *previous;
-    ngx_connection_t   *connection;
+    ngx_listening_t    *previous;               // 前一个ngx_listening_t
+    ngx_connection_t   *connection;             // 连接对象，客户端连接进来的socket
 
     ngx_uint_t          worker;
 
-    unsigned            open:1;
-    unsigned            remain:1;
-    unsigned            ignore:1;
+    unsigned            open:1;                 // 为1表示监听句柄有效，为0表示正常关闭
+    unsigned            remain:1;               // 为1表示不关闭原先打开的监听端口，为0表示关闭曾经打开的监听端口
+    unsigned            ignore:1;               // 为1表示跳过设置当前ngx_listening_t结构体中的套接字，为0时正常初始化套接字
 
-    unsigned            bound:1;       /* already bound */
-    unsigned            inherited:1;   /* inherited from previous process */
+    unsigned            bound:1;                // already bound
+    unsigned            inherited:1;            // inherited from previous process
     unsigned            nonblocking_accept:1;
-    unsigned            listen:1;
+    unsigned            listen:1;               // 为1表示当前结构体对应的套接字已经监听
     unsigned            nonblocking:1;
     unsigned            shared:1;    /* shared between threads or processes */
     unsigned            addr_ntop:1;
