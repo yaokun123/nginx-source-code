@@ -467,7 +467,7 @@ ngx_event_init_conf(ngx_cycle_t *cycle, void *conf)
     return NGX_CONF_OK;
 }
 
-
+//// event事件核心模块初始化函数
 static ngx_int_t
 ngx_event_module_init(ngx_cycle_t *cycle)
 {
@@ -479,6 +479,7 @@ ngx_event_module_init(ngx_cycle_t *cycle)
     ngx_core_conf_t     *ccf;
     ngx_event_conf_t    *ecf;
 
+    //// 获取配置信息
     cf = ngx_get_conf(cycle->conf_ctx, ngx_events_module);
     ecf = (*cf)[ngx_event_core_module.ctx_index];
 

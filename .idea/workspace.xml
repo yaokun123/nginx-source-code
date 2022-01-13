@@ -11,12 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
-    </list>
+    <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +115,7 @@
       <workItem from="1641604106092" duration="10490000" />
       <workItem from="1641979352076" duration="1414000" />
       <workItem from="1641980940425" duration="5039000" />
-      <workItem from="1641986753068" duration="20584000" />
+      <workItem from="1641986753068" duration="20985000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -388,14 +383,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642064547038</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="event模块的数据结构">
+      <created>1642065477722</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1642065477722</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ngx_os_signal_process调用系统函数发送信号" />
     <MESSAGE value="ngx_init_signals初始化信号处理" />
     <MESSAGE value="ngx_signal_handler信号处理函数只设置全局变量，没有做具体操作。" />
     <MESSAGE value="ngx_os_signal_process" />
@@ -420,7 +421,8 @@
     <MESSAGE value="ngx_listening_s监听结构体" />
     <MESSAGE value="ngx_connection_s client socket连接对象" />
     <MESSAGE value="ngx_event_s事件数据结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="ngx_event_s事件数据结构" />
+    <MESSAGE value="event模块的数据结构" />
+    <option name="LAST_COMMIT_MESSAGE" value="event模块的数据结构" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
