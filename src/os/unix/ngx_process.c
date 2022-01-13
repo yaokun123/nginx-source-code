@@ -82,6 +82,7 @@ ngx_signal_t  signals[] = {
     { 0, NULL, "", NULL }
 };
 
+//// 主进程开始创建worker进程
 //// proc = ngx_worker_process_cycle（worker进程工作逻辑）
 ngx_pid_t
 ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
@@ -91,16 +92,19 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     ngx_pid_t  pid;
     ngx_int_t  s;
 
+    //// 主进程开始创建worker进程时，respawn = NGX_PROCESS_RESPAWN = -3
     if (respawn >= 0) {
         s = respawn;
 
     } else {
+        //// s 最后一个进程的索引
         for (s = 0; s < ngx_last_process; s++) {
             if (ngx_processes[s].pid == -1) {
                 break;
             }
         }
 
+        /// 以后一个进程的索引超过最大限制。NGX_MAX_PROCESSES = 1024就不再创建worker进程了
         if (s == NGX_MAX_PROCESSES) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, 0,
                           "no more than %d processes can be spawned",
@@ -110,12 +114,25 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     }
 
 
-    if (respawn != NGX_PROCESS_DETACHED) {
+    if (respawn != NGX_PROCESS_DETACHED) {// NGX_PROCESS_DETACHED = -5      分离
 
         /* Solaris 9 still has no AF_LOCAL */
 
+        //// socketpair()函数用于创建一对无名的、相互连接的套接字。
+        //// 如果函数成功，则返回0，创建好的套接字分别是sv[0]和sv[1]；否则返回-1
+        //// 1、这对套接字可以用于全双工通信，每一个套接字既可以读也可以写。例如，可以往sv[0]中写，从sv[1]中读；或者从sv[1]中写，从sv[0]中读；
+        //// 2、如果往一个套接字(如sv[0])中写入后，再从该套接字读时会阻塞，只能在另一个套接字中(sv[1])上读成功；
+        //// 3、读、写操作可以位于同一个进程，也可以分别位于不同的进程，如父子进程。
+        //// 如果是父子进程时，一般会功能分离，一个进程用来读，一个用来写。
+        //// 因为文件描述符sv[0]和sv[1]是进程共享的，所以读的进程要关闭写描述符, 反之，写的进程关闭读描述符
+
+        //// 创建成功就会有ngx_processes[s].channel[0]、ngx_processes[s].channel[1]两个套接字
+        //// 统一规定：ngx_processes[s].channel[0]用于写、ngx_processes[s].channel[0]用于读
         if (socketpair(AF_UNIX, SOCK_STREAM, 0, ngx_processes[s].channel) == -1)
         {
+            //// PF_LOCAL        Host-internal protocols, formerly called PF_UNIX,
+            //// PF_UNIX         Host-internal protocols, deprecated, use PF_LOCAL
+            //// PF_INET         Internet version 4 protocols
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           "socketpair() failed while spawning \"%s\"", name);
             return NGX_INVALID_PID;
@@ -126,6 +143,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
                        ngx_processes[s].channel[0],
                        ngx_processes[s].channel[1]);
 
+        //// ngx_processes[s].channel[0]设置为非阻塞
         if (ngx_nonblocking(ngx_processes[s].channel[0]) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           ngx_nonblocking_n " failed while spawning \"%s\"",
@@ -134,6 +152,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
             return NGX_INVALID_PID;
         }
 
+        //// ngx_processes[s].channel[1]设置为非阻塞
         if (ngx_nonblocking(ngx_processes[s].channel[1]) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           ngx_nonblocking_n " failed while spawning \"%s\"",
@@ -142,6 +161,14 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
             return NGX_INVALID_PID;
         }
 
+
+        //// 对于socket来说，如果需要设置异步的话需要三个步骤
+        //// 1、必须注册一个响应SIGIO的信号回调函数
+        //// 2、通过fcntl设置F_SETOWN,使得socket属于某个进程
+        //// 3、通过fcntl设置O——ASYNC将该socket设置为异步
+
+        //// 设置channel[0]的信号驱动异步I/O标志 ，FIOASYNC：该状态标志决定是否收取针对socket的异步I/O信号（SIGIO）
+        //// 其与O_ASYNC文件状态标志等效，可通过fcntl的F_SETFL命令设置or清除
         on = 1;
         if (ioctl(ngx_processes[s].channel[0], FIOASYNC, &on) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
@@ -150,6 +177,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
             return NGX_INVALID_PID;
         }
 
+        //// F_SETOWN：用于指定接收SIGIO和SIGURG信号的socket属主（进程ID或进程组ID） 这里意思是指定Master进程接收SIGIO和SIGURG信号
         if (fcntl(ngx_processes[s].channel[0], F_SETOWN, ngx_pid) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           "fcntl(F_SETOWN) failed while spawning \"%s\"", name);

@@ -375,6 +375,7 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
     for (i = 0; i < n; i++) {
 
         //// 打开工作进程  （ngx_worker_process_cycle 回调函数，主要用于处理每个工作线程）
+        //// type = NGX_PROCESS_RESPAWN = -3
         ngx_spawn_process(cycle, ngx_worker_process_cycle,
                           (void *) (intptr_t) i, "worker process", type);
 
