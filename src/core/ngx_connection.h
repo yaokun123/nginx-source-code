@@ -118,29 +118,30 @@ typedef enum {
 #define NGX_SSL_BUFFERED       0x01
 #define NGX_HTTP_V2_BUFFERED   0x02
 
-
+//// socket连接对象结构
 struct ngx_connection_s {
-    void               *data;
-    ngx_event_t        *read;
-    ngx_event_t        *write;
+    void               *data;                   // 关联其它的 ngx_connection_s
+    ngx_event_t        *read;                   // 读取数据事件
+    ngx_event_t        *write;                  // 写入事件
 
-    ngx_socket_t        fd;
+    ngx_socket_t        fd;                     // socket句柄，client socket
 
-    ngx_recv_pt         recv;
-    ngx_send_pt         send;
-    ngx_recv_chain_pt   recv_chain;
-    ngx_send_chain_pt   send_chain;
+    ngx_recv_pt         recv;                   // 接收数据的函数指针
+    ngx_send_pt         send;                   // 发送数据的函数指针
+    ngx_recv_chain_pt   recv_chain;             // 批量接收数据的函数指针
+    ngx_send_chain_pt   send_chain;             // 批量发送数据的函数指针
 
-    ngx_listening_t    *listening;
+    ngx_listening_t    *listening;              // 该连接的网络监听数据结构
 
     off_t               sent;
 
-    ngx_log_t          *log;
+    ngx_log_t          *log;                    // 日志
 
-    ngx_pool_t         *pool;
+    ngx_pool_t         *pool;                   // 内存池
 
     int                 type;
 
+    // socket的地址结构
     struct sockaddr    *sockaddr;
     socklen_t           socklen;
     ngx_str_t           addr_text;
@@ -152,34 +153,37 @@ struct ngx_connection_s {
     ngx_ssl_connection_t  *ssl;
 #endif
 
+    // 本地监听socket的地址结构
     struct sockaddr    *local_sockaddr;
     socklen_t           local_socklen;
 
-    ngx_buf_t          *buffer;
+    ngx_buf_t          *buffer;                     // 用于接收和缓存客户端发来的字符流
 
-    ngx_queue_t         queue;
+    ngx_queue_t         queue;                      // 该字段表示将该连接以双向链表形式添加到cycle结构体中的   cycle->free_connections
 
-    ngx_atomic_uint_t   number;
+    ngx_atomic_uint_t   number;                     // 建立一条与后端服务器的连接,number+1
 
-    ngx_uint_t          requests;
+    ngx_uint_t          requests;                   // 处理请求的次数
 
     unsigned            buffered:8;
 
-    unsigned            log_error:3;     /* ngx_connection_log_error_e */
+    unsigned            log_error:3;                // 日志级别
 
-    unsigned            timedout:1;
-    unsigned            error:1;
-    unsigned            destroyed:1;
+    unsigned            timedout:1;                 // 不期待字符流结束
+    unsigned            error:1;                    // 连接处理过程中出现错误
+    unsigned            destroyed:1;                // 标识此链接已经销毁,内存池,套接字等都不可用
 
-    unsigned            idle:1;
-    unsigned            reusable:1;
-    unsigned            close:1;
+    unsigned            idle:1;                     // 连接处于空闲状态
+    unsigned            reusable:1;                 // 连接可以重用
+    unsigned            close:1;                    // 连接关闭
     unsigned            shared:1;
 
+    // 正在将文件中的数据发往另一端
     unsigned            sendfile:1;
     unsigned            sndlowat:1;
-    unsigned            tcp_nodelay:2;   /* ngx_connection_tcp_nodelay_e */
-    unsigned            tcp_nopush:2;    /* ngx_connection_tcp_nopush_e */
+
+    unsigned            tcp_nodelay:2;              // 使用tcp的nodely特性
+    unsigned            tcp_nopush:2;               // 使用tcp的nopush特性
 
     unsigned            need_last_buf:1;
 
