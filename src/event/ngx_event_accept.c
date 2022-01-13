@@ -664,7 +664,7 @@ ngx_trylock_accept_mutex(ngx_cycle_t *cycle)
         }
 
         ngx_accept_events = 0;
-        ngx_accept_mutex_held = 1;
+        ngx_accept_mutex_held = 1;          // 设置拿到锁的标志（全局变量）
 
         return NGX_OK;
     }
@@ -674,7 +674,7 @@ ngx_trylock_accept_mutex(ngx_cycle_t *cycle)
 
     //// 没有拿到锁，但是ngx_accept_mutex_held=1
     if (ngx_accept_mutex_held) {
-        //// 没有拿到锁，调用ngx_disable_accept_events，将accpet事件删除
+        //// 没有拿到锁，调用ngx_disable_accept_events，将accept事件删除
         if (ngx_disable_accept_events(cycle, 0) == NGX_ERROR) {
             return NGX_ERROR;
         }
@@ -723,6 +723,7 @@ ngx_disable_accept_events(ngx_cycle_t *cycle, ngx_uint_t all)
 
         c = ls[i].connection;
 
+        //// 如果c->read->active，则表示是活跃的连接，已经被使用中
         if (c == NULL || !c->read->active) {
             continue;
         }
@@ -740,6 +741,7 @@ ngx_disable_accept_events(ngx_cycle_t *cycle, ngx_uint_t all)
 
 #endif
 
+        //// 删除事件
         if (ngx_del_event(c->read, NGX_READ_EVENT, NGX_DISABLE_EVENT)
             == NGX_ERROR)
         {

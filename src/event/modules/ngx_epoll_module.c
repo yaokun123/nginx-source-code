@@ -778,8 +778,9 @@ ngx_epoll_notify(ngx_event_handler_pt handler)
 }
 
 #endif
-
-
+//// 1、如果抢到了锁，则会将accpet/read事件放到队列上延后处理，将accept事件放到ngx_posted_accept_events，read事件放到ngx_posted_events队列
+//// 2、没有抢到锁的进程都是处理当前连接的read事件，所以直接进行处理
+//// 读到锁时候的flags |= NGX_POST_EVENTS;
 static ngx_int_t
 ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
 {
@@ -880,6 +881,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
         }
 #endif
 
+        //// 读取事件 EPOLLIN
         if ((revents & EPOLLIN) && rev->active) {
 
 #if (NGX_HAVE_EPOLLRDHUP)
@@ -892,6 +894,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
 
             rev->ready = 1;
 
+            //// 如果进程抢到锁，则放入事件队列    flags |= NGX_POST_EVENTS;
             if (flags & NGX_POST_EVENTS) {
                 queue = rev->accept ? &ngx_posted_accept_events
                                     : &ngx_posted_events;
@@ -899,6 +902,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
                 ngx_post_event(rev, queue);
 
             } else {
+                //// 没有抢到锁，则直接处理read事件
                 rev->handler(rev);
             }
         }
