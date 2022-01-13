@@ -185,6 +185,12 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
             return NGX_INVALID_PID;
         }
 
+        //// 获得／设置文件描述符标记(cmd=F_GETFD或F_SETFD)
+        //// F_SETFD    设置close-on-exec标志，该标志以参数arg的FD_CLOEXEC位决定，
+        //// 应当了解很多现存的涉及文件描述符标志的程序并不使用常数 FD_CLOEXEC，
+        //// 而是将此标志设置为0(系统默认，在exec时不关闭)或1(在exec时关闭)
+
+        //// ngx_processes[s].channel[0]
         if (fcntl(ngx_processes[s].channel[0], F_SETFD, FD_CLOEXEC) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           "fcntl(FD_CLOEXEC) failed while spawning \"%s\"",
@@ -193,6 +199,7 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
             return NGX_INVALID_PID;
         }
 
+        //// ngx_processes[s].channel[1]
         if (fcntl(ngx_processes[s].channel[1], F_SETFD, FD_CLOEXEC) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           "fcntl(FD_CLOEXEC) failed while spawning \"%s\"",
@@ -225,8 +232,8 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     case 0:
         //// child
         //// 如果pid fork成功，则调用 ngx_worker_process_cycle方法,一切子进程的工作从这个方法开始
-        ngx_pid = ngx_getpid();
-        proc(cycle, data);
+        ngx_pid = ngx_getpid();     // worker子进程获取自己的进程id
+        proc(cycle, data);          // worker子进程的执行逻辑
         break;
 
     default:
@@ -234,20 +241,28 @@ ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
         break;
     }
 
+
+
+    //// worker在proc中循环，下面是master进程执行的代码。
+
     ngx_log_error(NGX_LOG_NOTICE, cycle->log, 0, "start %s %P", name, pid);
 
-    ngx_processes[s].pid = pid;
-    ngx_processes[s].exited = 0;
+    ngx_processes[s].pid = pid;     // 将fork出的worker子进程id放入结构体数组中
+    ngx_processes[s].exited = 0;    // 退出状态标记为0
 
+
+    //// 主进程开始创建worker进程时，respawn = NGX_PROCESS_RESPAWN = -3
     if (respawn >= 0) {
         return pid;
     }
 
-    ngx_processes[s].proc = proc;
-    ngx_processes[s].data = data;
-    ngx_processes[s].name = name;
-    ngx_processes[s].exiting = 0;
+    ngx_processes[s].proc = proc;   // worker进程的处理函数
+    ngx_processes[s].data = data;   // data
+    ngx_processes[s].name = name;   // name = "worker process"
+    ngx_processes[s].exiting = 0;   // 退出状态标记为0
 
+
+    //// 主进程开始创建worker进程时，respawn = NGX_PROCESS_RESPAWN = -3
     switch (respawn) {
 
     case NGX_PROCESS_NORESPAWN:
