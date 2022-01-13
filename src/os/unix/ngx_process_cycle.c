@@ -369,7 +369,7 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
 
     ngx_memzero(&ch, sizeof(ngx_channel_t));
 
-    ch.command = NGX_CMD_OPEN_CHANNEL;
+    ch.command = NGX_CMD_OPEN_CHANNEL;          // NGX_CMD_OPEN_CHANNEL = 1
 
     //// 循环创建工作进程
     for (i = 0; i < n; i++) {
@@ -378,10 +378,12 @@ ngx_start_worker_processes(ngx_cycle_t *cycle, ngx_int_t n, ngx_int_t type)
         ngx_spawn_process(cycle, ngx_worker_process_cycle,
                           (void *) (intptr_t) i, "worker process", type);
 
+        //// 主进程设置与管道通信相关，master与worker进程之间使用管道通信
         ch.pid = ngx_processes[ngx_process_slot].pid;
         ch.slot = ngx_process_slot;
-        ch.fd = ngx_processes[ngx_process_slot].channel[0];
+        ch.fd = ngx_processes[ngx_process_slot].channel[0];     // channel[0]写管道
 
+        //// 通知其他worker进程的管道，当前创建的worker进程管道是啥
         ngx_pass_open_channel(cycle, &ch);
     }
 }
@@ -448,8 +450,12 @@ ngx_pass_open_channel(ngx_cycle_t *cycle, ngx_channel_t *ch)
 {
     ngx_int_t  i;
 
+    //// 每次函数调用都会循环所有的worker进程 ngx_last_process（工作进程的个数）
     for (i = 0; i < ngx_last_process; i++) {
 
+        // 1、当前进程直接忽略
+        // 2、进程的pid=-1忽略
+        // 3、进程的管道没有打开也忽略
         if (i == ngx_process_slot
             || ngx_processes[i].pid == -1
             || ngx_processes[i].channel[0] == -1)
@@ -465,6 +471,7 @@ ngx_pass_open_channel(ngx_cycle_t *cycle, ngx_channel_t *ch)
 
         /* TODO: NGX_AGAIN */
 
+        //// 向除当前创建的worker进程外的其他worker进程的管道写，告诉他们当前创建得worker进程的写管道文件描述符是啥
         ngx_write_channel(ngx_processes[i].channel[0],
                           ch, sizeof(ngx_channel_t), cycle->log);
     }

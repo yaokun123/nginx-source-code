@@ -14,8 +14,9 @@
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conf/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_daemon.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_daemon.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_channel.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_channel.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +120,8 @@
       <workItem from="1641456043281" duration="3704000" />
       <workItem from="1641604106092" duration="10490000" />
       <workItem from="1641979352076" duration="1414000" />
-      <workItem from="1641980940425" duration="3402000" />
+      <workItem from="1641980940425" duration="5039000" />
+      <workItem from="1641986753068" duration="5173000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -310,14 +312,20 @@
       <option name="project" value="LOCAL" />
       <updated>1641983883972</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="实现后台守护进程">
+      <created>1641985020005</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1641985020005</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="nginx内存池" />
     <MESSAGE value="修改cmakelist.txt" />
     <MESSAGE value="内存池" />
     <MESSAGE value="修改list" />
@@ -342,18 +350,10 @@
     <MESSAGE value="nginx quit" />
     <MESSAGE value="被动套接字" />
     <MESSAGE value="被动套接字初始化" />
-    <option name="LAST_COMMIT_MESSAGE" value="被动套接字初始化" />
+    <MESSAGE value="实现后台守护进程" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现后台守护进程" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c</url>
-          <line>133</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="ccf-&gt;pid.data" />

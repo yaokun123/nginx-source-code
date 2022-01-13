@@ -82,7 +82,7 @@ ngx_signal_t  signals[] = {
     { 0, NULL, "", NULL }
 };
 
-
+//// proc = ngx_worker_process_cycle（worker进程工作逻辑）
 ngx_pid_t
 ngx_spawn_process(ngx_cycle_t *cycle, ngx_spawn_proc_pt proc, void *data,
     char *name, ngx_int_t respawn)

@@ -26,11 +26,11 @@ ngx_write_channel(ngx_socket_t s, ngx_channel_t *ch, size_t size,
         char            space[CMSG_SPACE(sizeof(int))];
     } cmsg;
 
-    if (ch->fd == -1) {
+    if (ch->fd == -1) {     // 如果当前创建的worker进程文件写管道没有打开
         msg.msg_control = NULL;
         msg.msg_controllen = 0;
 
-    } else {
+    } else {                // 封装信息
         msg.msg_control = (caddr_t) &cmsg;
         msg.msg_controllen = sizeof(cmsg);
 
@@ -76,9 +76,10 @@ ngx_write_channel(ngx_socket_t s, ngx_channel_t *ch, size_t size,
     msg.msg_iov = iov;
     msg.msg_iovlen = 1;
 
+    //// 发送消息
     n = sendmsg(s, &msg, 0);
 
-    if (n == -1) {
+    if (n == -1) {// 发送失败
         err = ngx_errno;
         if (err == NGX_EAGAIN) {
             return NGX_AGAIN;
