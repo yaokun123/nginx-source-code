@@ -750,16 +750,16 @@ ngx_master_process_exit(ngx_cycle_t *cycle)
     exit(0);
 }
 
-//// 子进程 回调函数（每个进程的逻辑处理就从这个方法开始）
+//// worker进程的工作
 static void
 ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
 {
     ngx_int_t worker = (intptr_t) data;
 
-    ngx_process = NGX_PROCESS_WORKER;
+    ngx_process = NGX_PROCESS_WORKER;       // 修改从master进程继承的全局变量ngx_process为NGX_PROCESS_WORKER
     ngx_worker = worker;
 
-    //// 工作进程初始化
+    //// 工作进程初始化，管道通信信号处理函数也是在这注册的（ngx_channel_handler）
     ngx_worker_process_init(cycle, worker);
 
     ngx_setproctitle("worker process"); // 设置title
@@ -809,7 +809,7 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
     }
 }
 
-
+//// worker进程初始化工作
 static void
 ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
 {
@@ -924,11 +924,8 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     tp = ngx_timeofday();
     srandom(((unsigned) ngx_pid << 16) ^ tp->sec ^ tp->msec);
 
-    /*
-     * disable deleting previous events for the listening sockets because
-     * in the worker processes there are no events at all at this point
-     */
-    //// 清除sokcet的监听
+
+    //// 禁用删除侦听套接字之前的事件，因为在工作进程中目前根本没有事件
     ls = cycle->listening.elts;
     for (i = 0; i < cycle->listening.nelts; i++) {
         ls[i].previous = NULL;
@@ -951,6 +948,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
             continue;
         }
 
+        // 当前进程忽略
         if (n == ngx_process_slot) {
             continue;
         }
@@ -959,12 +957,14 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
             continue;
         }
 
+        // 关闭其他worker进程的channel[1]
         if (close(ngx_processes[n].channel[1]) == -1) {
             ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                           "close() channel failed");
         }
     }
 
+    // 关闭自己的channel[0]
     if (close(ngx_processes[ngx_process_slot].channel[0]) == -1) {
         ngx_log_error(NGX_LOG_ALERT, cycle->log, ngx_errno,
                       "close() channel failed");

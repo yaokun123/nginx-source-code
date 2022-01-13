@@ -13,7 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +118,7 @@
       <workItem from="1641604106092" duration="10490000" />
       <workItem from="1641979352076" duration="1414000" />
       <workItem from="1641980940425" duration="5039000" />
-      <workItem from="1641986753068" duration="10527000" />
+      <workItem from="1641986753068" duration="12429000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -330,14 +330,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642045769073</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="fork worker">
+      <created>1642055269077</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1642055269077</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="修改list" />
     <MESSAGE value="主流程" />
     <MESSAGE value="idea" />
     <MESSAGE value="ngx_add_inherited_sockets继承套接字" />
@@ -362,7 +368,8 @@
     <MESSAGE value="实现后台守护进程" />
     <MESSAGE value="每创建一个worker都要循环通知其他worker进程，通信方式是使用管道" />
     <MESSAGE value="父子进程通信" />
-    <option name="LAST_COMMIT_MESSAGE" value="父子进程通信" />
+    <MESSAGE value="fork worker" />
+    <option name="LAST_COMMIT_MESSAGE" value="fork worker" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
