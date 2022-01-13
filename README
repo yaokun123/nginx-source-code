@@ -30,3 +30,16 @@ ngx_process_events中将所有事件（accept和read）放入对应的ngx_posted
 5、处理完accept事件后，就将文件锁释放
 6、接下来处理ngx_posted_events队列上的read事件，处理函数：ngx_event_process_posted
 
+
+
+
+
+#  Event模块的数据结构
+## 1. event事件模块的配置
+events {
+        use epoll;
+        worker_connections  1024;
+}
+event事件模块，配置分为两层：ngx_events_module 事件模块 和 ngx_event_core_module 事件核心模块。
+ngx_events_module：模块类型NGX_CORE_MODULE，所以此模块在最外层核心模块解析“events”命令的时候会回调ngx_events_block函数。
+ngx_event_core_module：模块类型NGX_EVENT_MODULE，所以此模块在ngx_events_block函数被回调后，才能解析配置信息

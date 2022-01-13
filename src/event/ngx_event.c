@@ -77,7 +77,9 @@ ngx_atomic_t         *ngx_stat_waiting = &ngx_stat_waiting0;
 #endif
 
 
-
+//// event模块命令集
+//// 回调函数：ngx_events_block
+//// 用于解析 event{} 块中的配置参数
 static ngx_command_t  ngx_events_commands[] = {
 
     { ngx_string("events"),
@@ -90,14 +92,16 @@ static ngx_command_t  ngx_events_commands[] = {
       ngx_null_command
 };
 
-
+//// event模块上下文
 static ngx_core_module_t  ngx_events_module_ctx = {
     ngx_string("events"),
     NULL,
     ngx_event_init_conf
 };
 
-
+//// event模块 - 事件模块
+//// 模块类型为核心模块，所以在ngx_init_cycle就会初始化conf
+//// 模块类型：NGX_CORE_MODULE                           NGX_EVENT_MODULE
 ngx_module_t  ngx_events_module = {
     NGX_MODULE_V1,
     &ngx_events_module_ctx,                /* module context */
@@ -113,10 +117,13 @@ ngx_module_t  ngx_events_module = {
     NGX_MODULE_V1_PADDING
 };
 
-
+//// event核心模块名称
 static ngx_str_t  event_core_name = ngx_string("event_core");
 
-
+//// 定义Event核心模块的命令参数
+//// worker_connections 工作线程最大连接数
+//// use 使用什么模型，例如epoll
+//// multi_accept、accept_mutex_delay、debug_connection
 static ngx_command_t  ngx_event_core_commands[] = {
 
     { ngx_string("worker_connections"),
@@ -164,7 +171,9 @@ static ngx_command_t  ngx_event_core_commands[] = {
       ngx_null_command
 };
 
-
+//// Event核心模块上下文
+//// ngx_event_core_create_conf：创建配置文件
+//// ngx_event_core_init_conf：初始化配置文件
 static ngx_event_module_t  ngx_event_core_module_ctx = {
     &event_core_name,
     ngx_event_core_create_conf,            /* create configuration */
@@ -174,6 +183,10 @@ static ngx_event_module_t  ngx_event_core_module_ctx = {
 };
 
 
+//// Event核心模块 - 事件核心模块
+//// ngx_event_module_init：模块初始化
+//// ngx_event_process_init：进程初始化
+//// 类型：NGX_EVENT_MODULE                          NGX_CORE_MODULE
 ngx_module_t  ngx_event_core_module = {
     NGX_MODULE_V1,
     &ngx_event_core_module_ctx,            /* module context */
