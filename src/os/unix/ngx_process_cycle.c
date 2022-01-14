@@ -760,6 +760,7 @@ ngx_worker_process_cycle(ngx_cycle_t *cycle, void *data)
     ngx_worker = worker;
 
     //// 工作进程初始化，管道通信信号处理函数也是在这注册的（ngx_channel_handler）
+    //// 将其他进程的channel[1]关闭，自己的channel[0]关闭
     ngx_worker_process_init(cycle, worker);
 
     ngx_setproctitle("worker process"); // 设置title
@@ -1045,7 +1046,7 @@ ngx_worker_process_exit(ngx_cycle_t *cycle)
     exit(0);
 }
 
-
+//// 管道处理函数
 static void
 ngx_channel_handler(ngx_event_t *ev)
 {
