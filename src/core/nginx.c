@@ -400,9 +400,11 @@ main(int argc, char *const *argv)
     ngx_use_stderr = 0;
 
     if (ngx_process == NGX_PROCESS_SINGLE) {
+        //// 非守护进程模式运行
         ngx_single_process_cycle(cycle);
 
     } else {
+        //// 守护进程模式运行
         //// 主进程进行信号的监听和处理
         //// 开启子进程
         ngx_master_process_cycle(cycle);
