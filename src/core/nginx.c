@@ -365,6 +365,7 @@ main(int argc, char *const *argv)
 
     //// 如果是后台运行，调试到这就会结束，因为该进程会结束，fork子进程继续往下执行了
     //// 这是守护进程的常用做法，因为该进程可能是进程组长，而进程组长不能创建会话，固不能实现守护进程，所以要使该进程退出让子进程来实现守护进程
+    //// 守护进程会修改全局变量ngx_pid
     if (!ngx_inherited && ccf->daemon) {
         if (ngx_daemon(cycle->log) != NGX_OK) {
             return 1;
