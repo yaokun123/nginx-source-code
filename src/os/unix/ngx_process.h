@@ -78,7 +78,7 @@ extern int            ngx_argc;     // 命令行参数个数
 extern char         **ngx_argv;     // 命令行参数
 extern char         **ngx_os_argv;
 
-extern ngx_pid_t      ngx_pid;
+extern ngx_pid_t      ngx_pid;      // master pid
 extern ngx_socket_t   ngx_channel;
 extern ngx_int_t      ngx_process_slot;
 extern ngx_int_t      ngx_last_process;
