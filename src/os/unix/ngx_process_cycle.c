@@ -933,7 +933,59 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     }
 
     //// 对模块初始化
+    //// ls = cycle->listening.elts;
+    //// c = ls[i].connection;
+    //// connection的初始化就是在模块初始化中进行的，如下是默认的模块，发现只有ngx_event_core_module模块有init_process
+    //// 名称为ngx_event_process_init
     for (i = 0; cycle->modules[i]; i++) {
+        // 1、name = ngx_core_module                     init_process = 0x0
+        // 2、name = ngx_errlog_module                   init_process = 0x0
+        // 3、name = ngx_conf_module                     init_process = 0x0
+        // 4、name = ngx_regex_module                    init_process = 0x0
+        // 5、name = ngx_events_module                   init_process = 0x0
+        // 6、name = ngx_event_core_module               init_process = 0x42ab3e <ngx_event_process_init>
+        // 7、name = ngx_epoll_module                    init_process = 0x0
+        // 8、name = ngx_http_module                     init_process = 0x0
+        // 9、name = ngx_http_core_module                init_process = 0x0
+        // 10、name = ngx_http_log_module                init_process = 0x0
+        // 11、name = ngx_http_upstream_module           init_process = 0x0
+        // 12、name = ngx_http_static_module             init_process = 0x0
+        // 13、name = ngx_http_autoindex_module          init_process = 0x0
+        // 14、name = ngx_http_index_module              init_process = 0x0
+        // 15、name = ngx_http_auth_basic_module         init_process = 0x0
+        // 16、name = ngx_http_access_module             init_process = 0x0
+        // 17、name = ngx_http_limit_conn_module         init_process = 0x0
+        // 18、name = ngx_http_limit_req_module          init_process = 0x0
+        // 19、name = ngx_http_geo_module                init_process = 0x0
+        // 20、name = ngx_http_map_module                init_process = 0x0
+        // 21、name = ngx_http_split_clients_module      init_process = 0x0
+        // 22、name = ngx_http_referer_module            init_process = 0x0
+        // 23、name = ngx_http_rewrite_module            init_process = 0x0
+        // 24、name = ngx_http_proxy_module              init_process = 0x0
+        // 25、name = ngx_http_fastcgi_module            init_process = 0x0
+        // 26、name = ngx_http_uwsgi_module              init_process = 0x0
+        // 27、name = ngx_http_scgi_module               init_process = 0x0
+        // 28、name = ngx_http_memcached_module          init_process = 0x0
+        // 29、name = ngx_http_empty_gif_module              init_process = 0x0
+        // 30、name = ngx_http_browser_module                init_process = 0x0
+        // 31、name = ngx_http_upstream_hash_module          init_process = 0x0
+        // 32、name = ngx_http_upstream_ip_hash_module       init_process = 0x0
+        // 33、name = ngx_http_upstream_least_conn_module    init_process = 0x0
+        // 34、name = ngx_http_upstream_keepalive_module     init_process = 0x0
+        // 35、name = ngx_http_upstream_zone_module          init_process = 0x0
+        // 36、name = ngx_http_write_filter_module           init_process = 0x0
+        // 37、name = ngx_http_header_filter_module          init_process = 0x0
+        // 38、name = ngx_http_chunked_filter_module         init_process = 0x0
+        // 39、name = ngx_http_range_header_filter_module    init_process = 0x0
+        // 40、name = ngx_http_gzip_filter_module            init_process = 0x0
+        // 41、name = ngx_http_postpone_filter_module        init_process = 0x0
+        // 42、name = ngx_http_ssi_filter_module             init_process = 0x0
+        // 43、name = ngx_http_charset_filter_module         init_process = 0x0
+        // 44、name = ngx_http_userid_filter_module          init_process = 0x0
+        // 45、name = ngx_http_headers_filter_module         init_process = 0x0
+        // 46、name = ngx_http_copy_filter_module            init_process = 0x0
+        // 47、name = ngx_http_range_body_filter_module      init_process = 0x0
+        // 48、name = ngx_http_not_modified_filter_module    init_process = 0x0
         if (cycle->modules[i]->init_process) {
             if (cycle->modules[i]->init_process(cycle) == NGX_ERROR) {
                 /* fatal */
