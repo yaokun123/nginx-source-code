@@ -381,6 +381,7 @@ main(int argc, char *const *argv)
 #endif
 
     //// 创建pid文件。例如：/usr/local/nginx-xxx/nginx.pid
+    //// 就是向文件中写入全局变量ngx_pid的值
     if (ngx_create_pidfile(&ccf->pid, cycle->log) != NGX_OK) {
         return 1;
     }

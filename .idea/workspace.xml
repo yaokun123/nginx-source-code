@@ -12,7 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/nginx.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/nginx.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +119,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="239000" />
+      <workItem from="1642489436106" duration="562000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -408,15 +408,27 @@
       <option name="project" value="LOCAL" />
       <updated>1642132085172</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="pid">
+      <created>1642490143164</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1642490143164</updated>
+    </task>
+    <task id="LOCAL-00043" summary="守护进程会修改全局变量ngx_pid">
+      <created>1642490319061</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1642490319061</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ngx_signal_handler信号处理函数只设置全局变量，没有做具体操作。" />
-    <MESSAGE value="ngx_os_signal_process" />
     <MESSAGE value="ngx_cycle_t结构体" />
     <MESSAGE value="cycle全局变量初始化" />
     <MESSAGE value="ngx_master_process_cycle创建子进程worker，master循环监听" />
@@ -440,7 +452,9 @@
     <MESSAGE value="ngx_event_s事件数据结构" />
     <MESSAGE value="event模块的数据结构" />
     <MESSAGE value="管道处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="管道处理" />
+    <MESSAGE value="pid" />
+    <MESSAGE value="守护进程会修改全局变量ngx_pid" />
+    <option name="LAST_COMMIT_MESSAGE" value="守护进程会修改全局变量ngx_pid" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
