@@ -43,3 +43,11 @@ events {
 event事件模块，配置分为两层：ngx_events_module 事件模块 和 ngx_event_core_module 事件核心模块。
 ngx_events_module：模块类型NGX_CORE_MODULE，所以此模块在最外层核心模块解析“events”命令的时候会回调ngx_events_block函数。
 ngx_event_core_module：模块类型NGX_EVENT_MODULE，所以此模块在ngx_events_block函数被回调后，才能解析配置信息
+
+
+
+
+
+ngx_add_event(c->read, NGX_READ_EVENT, 0)
+ngx_del_event(c->read, NGX_READ_EVENT, NGX_DISABLE_EVENT)
+ngx_process_events(cycle, timer, flags);

@@ -685,7 +685,7 @@ ngx_trylock_accept_mutex(ngx_cycle_t *cycle)
     return NGX_OK;
 }
 
-//// 开启accept事件的监听，并将accept事件加入到event上
+//// 拿到锁之后，该进程开启accept事件的监听，并将accept事件加入到event上
 static ngx_int_t
 ngx_enable_accept_events(ngx_cycle_t *cycle)
 {
@@ -694,10 +694,12 @@ ngx_enable_accept_events(ngx_cycle_t *cycle)
     ngx_connection_t  *c;
 
     ls = cycle->listening.elts;
+    //// 循环遍历所有监听的被动套接字
     for (i = 0; i < cycle->listening.nelts; i++) {
 
         c = ls[i].connection;
 
+        //// 如果c->read->active，则表示是活跃的连接，已经被使用中
         if (c == NULL || c->read->active) {
             continue;
         }
