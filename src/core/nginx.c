@@ -232,6 +232,7 @@ main(int argc, char *const *argv)
 #endif
 
     //// 获取当前进程的pid。一般pid会放在/usr/local/nginx-xxx/nginx.pid的文件中，用于发送重启，关闭等信号命令
+    //// 如果是后台守护进程模式运行的话，在守护进程的实现中会修改全局变量ngx_pid的值
     ngx_pid = ngx_getpid();
 
     //// 初始化日志，并得到日志的文件句柄ngx_log_file.fd，-p会设置ngx_prefix
