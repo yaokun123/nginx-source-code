@@ -18,7 +18,7 @@ static void ngx_debug_accepted_connection(ngx_event_conf_t *ecf,
     ngx_connection_t *c);
 #endif
 
-
+//// 处理accept事件
 void
 ngx_event_accept(ngx_event_t *ev)
 {
@@ -36,6 +36,7 @@ ngx_event_accept(ngx_event_t *ev)
     static ngx_uint_t  use_accept4 = 1;
 #endif
 
+    //// 事件的超时事件处理
     if (ev->timedout) {
         if (ngx_enable_accept_events((ngx_cycle_t *) ngx_cycle) != NGX_OK) {
             return;
@@ -44,9 +45,11 @@ ngx_event_accept(ngx_event_t *ev)
         ev->timedout = 0;
     }
 
+    //// 获取事件核心配置
     ecf = ngx_event_get_conf(ngx_cycle->conf_ctx, ngx_event_core_module);
 
     if (!(ngx_event_flags & NGX_USE_KQUEUE_EVENT)) {
+        //// 支持多accept
         ev->available = ecf->multi_accept;
     }
 
@@ -67,9 +70,12 @@ ngx_event_accept(ngx_event_t *ev)
             s = accept(lc->fd, &sa.sockaddr, &socklen);
         }
 #else
+        //// 调用系统函数接收客户端的请求
+        //// s为客户端的socket
         s = accept(lc->fd, &sa.sockaddr, &socklen);
 #endif
 
+        //// s == -1请求出错
         if (s == (ngx_socket_t) -1) {
             err = ngx_socket_errno;
 
@@ -138,11 +144,15 @@ ngx_event_accept(ngx_event_t *ev)
         (void) ngx_atomic_fetch_add(ngx_stat_accepted, 1);
 #endif
 
+        //// 简单的负载均衡
         ngx_accept_disabled = ngx_cycle->connection_n / 8
                               - ngx_cycle->free_connection_n;
 
+        //// 获取空闲连接的数据结构
+        //// c->fd = s;
         c = ngx_get_connection(s, ev->log);
 
+        //// 没有空闲连接，关闭客户端socket
         if (c == NULL) {
             if (ngx_close_socket(s) == -1) {
                 ngx_log_error(NGX_LOG_ALERT, ev->log, ngx_socket_errno,
@@ -184,6 +194,7 @@ ngx_event_accept(ngx_event_t *ev)
 
         /* set a blocking mode for iocp and non-blocking mode for others */
 
+        //// 设置非阻塞相关
         if (ngx_inherited_nonblocking) {
             if (ngx_event_flags & NGX_USE_IOCP_EVENT) {
                 if (ngx_blocking(s) == -1) {
@@ -300,6 +311,8 @@ ngx_event_accept(ngx_event_t *ev)
         }
 #endif
 
+        //// 将客户端的连接加入 监控
+        //// epoll对应的就是添加连接函数为 ngx_epoll_add_connection
         if (ngx_add_conn && (ngx_event_flags & NGX_USE_EPOLL_EVENT) == 0) {
             if (ngx_add_conn(c) == NGX_ERROR) {
                 ngx_close_accepted_connection(c);
@@ -310,6 +323,7 @@ ngx_event_accept(ngx_event_t *ev)
         log->data = NULL;
         log->handler = NULL;
 
+        //// 调用 ngx_http_init_connection 函数位于src/http/ngx_http_request.c
         ls->handler(c);
 
         if (ngx_event_flags & NGX_USE_KQUEUE_EVENT) {
@@ -322,6 +336,7 @@ ngx_event_accept(ngx_event_t *ev)
 
 #if !(NGX_WIN32)
 
+//// 处理客户端的消息事件
 void
 ngx_event_recvmsg(ngx_event_t *ev)
 {

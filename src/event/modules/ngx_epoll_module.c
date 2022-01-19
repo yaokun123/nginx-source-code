@@ -702,7 +702,7 @@ ngx_epoll_del_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
     return NGX_OK;
 }
 
-
+//// 将客户端的连接加入监听
 static ngx_int_t
 ngx_epoll_add_connection(ngx_connection_t *c)
 {
