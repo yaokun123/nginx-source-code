@@ -324,6 +324,7 @@ ngx_event_accept(ngx_event_t *ev)
         log->handler = NULL;
 
         //// 调用 ngx_http_init_connection 函数位于src/http/ngx_http_request.c
+        //// 初始化http的客户端连接，比如设置c->read->handler = ngx_http_wait_request_handler
         ls->handler(c);
 
         if (ngx_event_flags & NGX_USE_KQUEUE_EVENT) {

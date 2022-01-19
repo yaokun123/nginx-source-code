@@ -57,6 +57,7 @@ cycle->read_events
 cycle->write_events
 accept读事件ngx_event_accept
         accept客户端socket之后就会调用 ngx_http_init_connection(c)
+        设置c->read->handler为 ngx_http_wait_request_handler
 
 
 

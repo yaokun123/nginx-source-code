@@ -195,6 +195,7 @@ ngx_http_header_t  ngx_http_headers_in[] = {
 };
 
 
+//// 初始化http的客户端连接
 void
 ngx_http_init_connection(ngx_connection_t *c)
 {
@@ -279,7 +280,7 @@ ngx_http_init_connection(ngx_connection_t *c)
         switch (c->local_sockaddr->sa_family) {
 
 #if (NGX_HAVE_INET6)
-        case AF_INET6:
+        case AF_INET6:                      //// ipv6
             addr6 = port->addrs;
             hc->addr_conf = &addr6[0].conf;
             break;
@@ -313,7 +314,7 @@ ngx_http_init_connection(ngx_connection_t *c)
     c->log_error = NGX_ERROR_INFO;
 
     rev = c->read;
-    rev->handler = ngx_http_wait_request_handler;
+    rev->handler = ngx_http_wait_request_handler;       //// 设置客户端的连接c->read->handler为ngx_http_wait_request_handler
     c->write->handler = ngx_http_empty_handler;
 
 #if (NGX_HTTP_V2)
@@ -352,6 +353,7 @@ ngx_http_init_connection(ngx_connection_t *c)
         c->log->action = "reading PROXY protocol";
     }
 
+    //// 如果准备好了直接调用handler
     if (rev->ready) {
         /* the deferred accept(), iocp */
 
@@ -367,6 +369,7 @@ ngx_http_init_connection(ngx_connection_t *c)
     ngx_add_timer(rev, c->listening->post_accept_timeout);
     ngx_reusable_connection(c, 1);
 
+    //// 检查客户端连接是否有效
     if (ngx_handle_read_event(rev, 0) != NGX_OK) {
         ngx_http_close_connection(c);
         return;
