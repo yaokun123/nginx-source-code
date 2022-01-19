@@ -12,10 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_accept.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_accept.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_posted.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_posted.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,14 +119,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="19546000" />
-    </task>
-    <task id="LOCAL-00004" summary="修改list">
-      <created>1641375965554</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1641375965554</updated>
+      <workItem from="1642489436106" duration="20018000" />
     </task>
     <task id="LOCAL-00005" summary="主流程">
       <created>1641640671484</created>
@@ -467,14 +457,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642566778140</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="活跃事件先写入队列">
+      <created>1642574547053</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1642574547053</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ngx_worker_process_cycle 子进程循环" />
     <MESSAGE value="ngx_worker_process_init工作进程初始化" />
     <MESSAGE value="ngx_process_events_and_timers进程事件分发器" />
     <MESSAGE value="nginx -s reload" />
@@ -499,7 +495,8 @@
     <MESSAGE value="模块数组定义" />
     <MESSAGE value="init process：ngx_event_process_init的定义" />
     <MESSAGE value="连接数据结构分配" />
-    <option name="LAST_COMMIT_MESSAGE" value="连接数据结构分配" />
+    <MESSAGE value="活跃事件先写入队列" />
+    <option name="LAST_COMMIT_MESSAGE" value="活跃事件先写入队列" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

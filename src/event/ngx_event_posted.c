@@ -20,6 +20,7 @@ ngx_event_process_posted(ngx_cycle_t *cycle, ngx_queue_t *posted)
     ngx_queue_t  *q;
     ngx_event_t  *ev;
 
+    //// 循环从队列中取出活跃文件描述符
     while (!ngx_queue_empty(posted)) {
 
         q = ngx_queue_head(posted);
@@ -31,6 +32,8 @@ ngx_event_process_posted(ngx_cycle_t *cycle, ngx_queue_t *posted)
         ngx_delete_posted_event(ev);
 
         //// 事件回调函数
+        //// 对于accept来说回调函数就是 ngx_event_accept
+        //// 其他事件。。。
         ev->handler(ev);
     }
 }
