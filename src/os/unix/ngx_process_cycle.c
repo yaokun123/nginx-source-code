@@ -938,6 +938,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     //// connection的初始化就是在模块初始化中进行的，如下是默认的模块，发现只有ngx_event_core_module模块有init_process
     //// 名称为ngx_event_process_init
     for (i = 0; cycle->modules[i]; i++) {
+        //// 见ngx_modules.c ngx_modules[]数组指针
         // 1、name = ngx_core_module                     init_process = 0x0
         // 2、name = ngx_errlog_module                   init_process = 0x0
         // 3、name = ngx_conf_module                     init_process = 0x0

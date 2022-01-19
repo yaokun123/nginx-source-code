@@ -12,7 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_modules.c" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_modules.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/os/unix/ngx_process_cycle.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -120,7 +120,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="9369000" />
+      <workItem from="1642489436106" duration="10077000" />
     </task>
     <task id="LOCAL-00001" summary="nginx内存池">
       <created>1639720097743</created>
@@ -451,14 +451,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642495767560</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="模块初始化">
+      <created>1642501913615</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1642501913615</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cycle全局变量初始化" />
     <MESSAGE value="ngx_master_process_cycle创建子进程worker，master循环监听" />
     <MESSAGE value="ngx_start_worker_processes创建工作进程" />
     <MESSAGE value="ngx_spawn_process fork创建子进程" />
@@ -483,7 +489,8 @@
     <MESSAGE value="pid" />
     <MESSAGE value="守护进程会修改全局变量ngx_pid" />
     <MESSAGE value="守护进程 和 非守护进程模式运行" />
-    <option name="LAST_COMMIT_MESSAGE" value="守护进程 和 非守护进程模式运行" />
+    <MESSAGE value="模块初始化" />
+    <option name="LAST_COMMIT_MESSAGE" value="模块初始化" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

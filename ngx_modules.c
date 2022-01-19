@@ -59,7 +59,7 @@ ngx_module_t *ngx_modules[] = {
     &ngx_conf_module,
     &ngx_regex_module,
     &ngx_events_module,
-    &ngx_event_core_module,
+    &ngx_event_core_module,     // ls = cycle->listening.elts;c = ls[i].connection;connection的初始化
     &ngx_kqueue_module,
     &ngx_http_module,
     &ngx_http_core_module,
