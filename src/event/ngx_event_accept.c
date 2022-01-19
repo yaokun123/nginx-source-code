@@ -704,6 +704,8 @@ ngx_enable_accept_events(ngx_cycle_t *cycle)
             continue;
         }
 
+        //// 添加到监控，对于epoll来说是调用epoll_ctl将被动套接字加入监控
+        //// 在epoll中对应ngx_epoll_module.c文件ngx_epoll_add_event函数
         if (ngx_add_event(c->read, NGX_READ_EVENT, 0) == NGX_ERROR) {
             return NGX_ERROR;
         }
@@ -743,7 +745,8 @@ ngx_disable_accept_events(ngx_cycle_t *cycle, ngx_uint_t all)
 
 #endif
 
-        //// 删除事件
+        //// 从监控中移除，对于epoll来说是调用epoll_ctl将被动套接字移除监控
+        //// 在epoll中对应ngx_epoll_module.c文件ngx_epoll_add_event函数
         if (ngx_del_event(c->read, NGX_READ_EVENT, NGX_DISABLE_EVENT)
             == NGX_ERROR)
         {

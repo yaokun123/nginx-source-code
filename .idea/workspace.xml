@@ -13,7 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/ngx_connection.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_connection.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/modules/ngx_epoll_module.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_accept.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_accept.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,14 +122,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="16201000" />
-    </task>
-    <task id="LOCAL-00003" summary="内存池">
-      <created>1641373973017</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1641373973018</updated>
+      <workItem from="1642489436106" duration="19546000" />
     </task>
     <task id="LOCAL-00004" summary="修改list">
       <created>1641375965554</created>
@@ -465,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642564058274</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="连接数据结构分配">
+      <created>1642566778140</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1642566778140</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

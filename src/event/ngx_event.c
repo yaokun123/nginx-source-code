@@ -278,7 +278,7 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
 	 * 参数：timer-epoll_wait超时时间  (ngx_accept_mutex_delay-延迟拿锁事件   NGX_TIMER_INFINITE-正常的epollwait等待事件)
 	 */
     (void) ngx_process_events(cycle, timer, flags);
-    // 这个方法，我们主要看epoll模型下的ngx_epoll_process_events方法（ngx_epoll_module.c）
+    // 这个方法，我们主要看epoll模型下的ngx_epoll_process_events方法（src/event/modules/ngx_epoll_module.c）
 
     delta = ngx_current_msec - delta;
 

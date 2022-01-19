@@ -574,7 +574,8 @@ ngx_epoll_done(ngx_cycle_t *cycle)
     nevents = 0;
 }
 
-
+//// epoll加入事件
+//// accept：ngx_add_event(c->read, NGX_READ_EVENT, 0)
 static ngx_int_t
 ngx_epoll_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
 {
@@ -588,7 +589,7 @@ ngx_epoll_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
 
     events = (uint32_t) event;
 
-    if (event == NGX_READ_EVENT) {
+    if (event == NGX_READ_EVENT) {      // 读事件
         e = c->write;
         prev = EPOLLOUT;
 #if (NGX_READ_EVENT != EPOLLIN|EPOLLRDHUP)
@@ -624,6 +625,10 @@ ngx_epoll_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
                    "epoll add event: fd:%d op:%d ev:%08XD",
                    c->fd, op, ee.events);
 
+    //// 调用系统函数epoll_ctl，见被动套接字加入监控
+    //// ep：全局遍历，事件管理池，由epoll_create创建的epfd文件描述符
+    //// op：EPOLL_CTL_ADD｜EPOLL_CTL_MOD｜EPOLL_CTL_DEL 操作类型，添加、修改、删除
+    //// c->fd：就是服务端创建的被动套接字
     if (epoll_ctl(ep, op, c->fd, &ee) == -1) {
         ngx_log_error(NGX_LOG_ALERT, ev->log, ngx_errno,
                       "epoll_ctl(%d, %d) failed", op, c->fd);
@@ -638,7 +643,8 @@ ngx_epoll_add_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
     return NGX_OK;
 }
 
-
+//// epoll移除事件
+//// accept：ngx_del_event(c->read, NGX_READ_EVENT, NGX_DISABLE_EVENT)
 static ngx_int_t
 ngx_epoll_del_event(ngx_event_t *ev, ngx_int_t event, ngx_uint_t flags)
 {
@@ -798,7 +804,13 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
     ngx_log_debug1(NGX_LOG_DEBUG_EVENT, cycle->log, 0,
                    "epoll timer: %M", timer);
 
+    //// 调用系统函数epoll_wait，拿出活跃的文件描述符
+    //// ep：全局遍历，事件管理池，由epoll_create创建的epfd文件描述符
+    //// event_list：全局变量，用于接收活跃的事件，以后遍历这个全局变量处理具体活跃事件即可
+    //// nevents：全局变量，一次返回的最大的活跃文件描述符个数
+    //// timer：局部变量，参数。超时时间
     events = epoll_wait(ep, event_list, (int) nevents, timer);
+    //// 返回值events表示活跃文件描述符的个数
 
     err = (events == -1) ? ngx_errno : 0;
 
@@ -806,6 +818,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
         ngx_time_update();
     }
 
+    //// 出错
     if (err) {
         if (err == NGX_EINTR) {
 
@@ -824,6 +837,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
         return NGX_ERROR;
     }
 
+    //// 没有活跃的文件描述符
     if (events == 0) {
         if (timer != NGX_TIMER_INFINITE) {
             return NGX_OK;
@@ -834,6 +848,8 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
         return NGX_ERROR;
     }
 
+    //// 循环变量活跃的文件描述符，取出每一个进程处理
+    //// event_list：全局变量，用于接收活跃的事件，以后遍历这个全局变量处理具体活跃事件即可
     for (i = 0; i < events; i++) {
         c = event_list[i].data.ptr;
 
@@ -895,11 +911,14 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
             rev->ready = 1;
 
             //// 如果进程抢到锁，则放入事件队列    flags |= NGX_POST_EVENTS;
+            //// rev->accept表示是accept事件还是其他
+            //// accept事件存放在ngx_posted_accept_events队列中
+            //// 其他事件存放在ngx_posted_events队列中
             if (flags & NGX_POST_EVENTS) {
                 queue = rev->accept ? &ngx_posted_accept_events
                                     : &ngx_posted_events;
 
-                ngx_post_event(rev, queue);
+                ngx_post_event(rev, queue);     // 放入队列待下一步处理
 
             } else {
                 //// 没有抢到锁，则直接处理read事件
