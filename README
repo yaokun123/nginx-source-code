@@ -51,3 +51,8 @@ ngx_event_core_module：模块类型NGX_EVENT_MODULE，所以此模块在ngx_eve
 ngx_add_event(c->read, NGX_READ_EVENT, 0)
 ngx_del_event(c->read, NGX_READ_EVENT, NGX_DISABLE_EVENT)
 ngx_process_events(cycle, timer, flags);
+
+cycle->connections
+cycle->read_events
+cycle->write_events
+accept读事件ngx_event_accept

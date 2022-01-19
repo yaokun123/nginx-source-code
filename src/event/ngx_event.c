@@ -612,7 +612,7 @@ ngx_timer_signal_handler(int signo)
 
 #endif
 
-
+//// 在worker进程初始化的时候会调用
 static ngx_int_t
 ngx_event_process_init(ngx_cycle_t *cycle)
 {
@@ -647,6 +647,8 @@ ngx_event_process_init(ngx_cycle_t *cycle)
 
 #endif
 
+    //// worker进程初始化两个队列，全局变量ngx_posted_accept_events用于暂存accept事件
+    //// 全局变量ngx_posted_events普通事件都会存放在这个队列上
     ngx_queue_init(&ngx_posted_accept_events);
     ngx_queue_init(&ngx_posted_events);
 
@@ -654,7 +656,10 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         return NGX_ERROR;
     }
 
+    //// 循环遍历所有的module
     for (m = 0; cycle->modules[m]; m++) {
+
+        // 类型不是event事件的跳过
         if (cycle->modules[m]->type != NGX_EVENT_MODULE) {
             continue;
         }
@@ -729,57 +734,63 @@ ngx_event_process_init(ngx_cycle_t *cycle)
 
 #endif
 
+    //// worker进程初始化connections的数据结构，根据connection_n分配内存
+    //// connection_n是配置文件解析时根据worker_connections配置的数量来的
     cycle->connections =
         ngx_alloc(sizeof(ngx_connection_t) * cycle->connection_n, cycle->log);
     if (cycle->connections == NULL) {
         return NGX_ERROR;
     }
+    c = cycle->connections;     // c指向connections的头部
 
-    c = cycle->connections;
-
+    //// worker进程初始化read_events的数据结构，根据connection_n分配内存
+    //// connection_n是配置文件解析时根据worker_connections配置的数量来的
     cycle->read_events = ngx_alloc(sizeof(ngx_event_t) * cycle->connection_n,
                                    cycle->log);
     if (cycle->read_events == NULL) {
         return NGX_ERROR;
     }
-
-    rev = cycle->read_events;
+    rev = cycle->read_events;   // rev指向read_events的头部
     for (i = 0; i < cycle->connection_n; i++) {
+        // 将read_events的数据结构closed/instance标识都设置为1
         rev[i].closed = 1;
         rev[i].instance = 1;
     }
 
+    //// worker进程初始化cycle->write_events的数据结构，根据connection_n分配内存
+    //// connection_n是配置文件解析时根据worker_connections配置的数量来的
     cycle->write_events = ngx_alloc(sizeof(ngx_event_t) * cycle->connection_n,
                                     cycle->log);
     if (cycle->write_events == NULL) {
         return NGX_ERROR;
     }
-
-    wev = cycle->write_events;
+    wev = cycle->write_events;  // wev指向write_events的头部
     for (i = 0; i < cycle->connection_n; i++) {
-        wev[i].closed = 1;
+        wev[i].closed = 1;      // 将write_events的数据结构closed标识都设置为1
     }
 
-    i = cycle->connection_n;
+    i = cycle->connection_n;    // i就是连接的个数
     next = NULL;
 
     do {
+        // 从后向前设置cycle->connections的每一个数据结构
         i--;
 
         c[i].data = next;
-        c[i].read = &cycle->read_events[i];
-        c[i].write = &cycle->write_events[i];
-        c[i].fd = (ngx_socket_t) -1;
+        c[i].read = &cycle->read_events[i];     // 将cycle->connections[i]的read 与 cycle->read_events[i]对应起来
+        c[i].write = &cycle->write_events[i];   // 将cycle->connections[i]的write 与 cycle->write_events[i]对应起来
+        c[i].fd = (ngx_socket_t) -1;            // cycle->connections[i]的文件描述符号fd设置为-1，因为此时只是初始化，还没有客户端连接进来
 
         next = &c[i];
     } while (i);
 
-    cycle->free_connections = next;
-    cycle->free_connection_n = cycle->connection_n;
+    cycle->free_connections = next;             // 空闲连接的指针指向cycle->connections的第一个[0]
+    cycle->free_connection_n = cycle->connection_n;// 空闲连接的个数 = cycle->connection_n，此时没有连接，所有的都是空闲
 
     /* for each listening socket */
 
     ls = cycle->listening.elts;
+    //// 循环遍历监听的socket
     for (i = 0; i < cycle->listening.nelts; i++) {
 
 #if (NGX_HAVE_REUSEPORT)
@@ -788,6 +799,8 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         }
 #endif
 
+        // ls[i].fd即为监听的被动套接字
+        //// 根据被动套接字，从cycle->connections空闲数组中拿出一个
         c = ngx_get_connection(ls[i].fd, cycle->log);
 
         if (c == NULL) {
@@ -797,13 +810,13 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         c->type = ls[i].type;
         c->log = &ls[i].log;
 
-        c->listening = &ls[i];
-        ls[i].connection = c;
+        c->listening = &ls[i];  // 这个连接监听的被动套接字的数据结构
+        ls[i].connection = c;   // 被动套接字中的connection连接字段又指向这个连接
 
-        rev = c->read;
+        rev = c->read;          // 这个连接的读事件
 
         rev->log = c->log;
-        rev->accept = 1;
+        rev->accept = 1;        // 标识accept
 
 #if (NGX_HAVE_DEFERRED_ACCEPT)
         rev->deferred_accept = ls[i].deferred_accept;
@@ -867,6 +880,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
 
 #else
 
+        //// 连接读事件的处理函数 ngx_event_accept(TCP)
         rev->handler = (c->type == SOCK_STREAM) ? ngx_event_accept
                                                 : ngx_event_recvmsg;
 
@@ -881,7 +895,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         }
 
 #endif
-
+        //// 如果使用accept的锁，就直接返回，由获取锁进行ngx_add_event的操作
         if (ngx_use_accept_mutex) {
             continue;
         }
@@ -901,7 +915,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         }
 
 #endif
-
+        //// 没有使用accept的锁时候，就直接调用ngx_add_event的操作
         if (ngx_add_event(rev, NGX_READ_EVENT, 0) == NGX_ERROR) {
             return NGX_ERROR;
         }

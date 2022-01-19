@@ -1041,7 +1041,7 @@ ngx_close_listening_sockets(ngx_cycle_t *cycle)
     cycle->listening.nelts = 0;
 }
 
-
+//// 从cycle->connections空闲连接中获取一个连接的结构出来
 ngx_connection_t *
 ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
 {
@@ -1059,8 +1059,9 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
         return NULL;
     }
 
-    c = ngx_cycle->free_connections;
+    c = ngx_cycle->free_connections;        // c指向空闲connections的头部
 
+    //// 如果空闲连接用完了
     if (c == NULL) {
         ngx_drain_connections((ngx_cycle_t *) ngx_cycle);
         c = ngx_cycle->free_connections;
@@ -1074,8 +1075,8 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
         return NULL;
     }
 
-    ngx_cycle->free_connections = c->data;
-    ngx_cycle->free_connection_n--;
+    ngx_cycle->free_connections = c->data;      // 空闲connections的头部修改为下一个空闲connections
+    ngx_cycle->free_connection_n--;             // 空闲connections的个数-1
 
     if (ngx_cycle->files && ngx_cycle->files[s] == NULL) {
         ngx_cycle->files[s] = c;
