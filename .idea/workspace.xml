@@ -13,9 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/ngx_connection.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ngx_connection.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,14 +120,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="15015000" />
-    </task>
-    <task id="LOCAL-00002" summary="修改cmakelist.txt">
-      <created>1641371611868</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1641371611868</updated>
+      <workItem from="1642489436106" duration="16201000" />
     </task>
     <task id="LOCAL-00003" summary="内存池">
       <created>1641373973017</created>
@@ -467,14 +458,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642558913520</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="连接数据结构分配">
+      <created>1642564058273</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1642564058274</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ngx_spawn_process fork创建子进程" />
     <MESSAGE value="ngx_worker_process_cycle 子进程循环" />
     <MESSAGE value="ngx_worker_process_init工作进程初始化" />
     <MESSAGE value="ngx_process_events_and_timers进程事件分发器" />
@@ -499,7 +496,8 @@
     <MESSAGE value="模块初始化" />
     <MESSAGE value="模块数组定义" />
     <MESSAGE value="init process：ngx_event_process_init的定义" />
-    <option name="LAST_COMMIT_MESSAGE" value="init process：ngx_event_process_init的定义" />
+    <MESSAGE value="连接数据结构分配" />
+    <option name="LAST_COMMIT_MESSAGE" value="连接数据结构分配" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

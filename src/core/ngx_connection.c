@@ -1082,11 +1082,14 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
         ngx_cycle->files[s] = c;
     }
 
-    rev = c->read;
-    wev = c->write;
+    //// 保存
+    rev = c->read;                              // 连接的读事件 rev->handler = ngx_event_accept
+    wev = c->write;                             // 连接的写事件
 
+    //// 重置连接
     ngx_memzero(c, sizeof(ngx_connection_t));
 
+    //// 写回
     c->read = rev;
     c->write = wev;
     c->fd = s;
@@ -1094,6 +1097,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
 
     instance = rev->instance;
 
+    // 重置读写
     ngx_memzero(rev, sizeof(ngx_event_t));
     ngx_memzero(wev, sizeof(ngx_event_t));
 
@@ -1108,6 +1112,7 @@ ngx_get_connection(ngx_socket_t s, ngx_log_t *log)
 
     wev->write = 1;
 
+    //// 返回连接
     return c;
 }
 
