@@ -58,6 +58,8 @@ cycle->write_events
 accept读事件ngx_event_accept
         accept客户端socket之后就会调用 ngx_http_init_connection(c)
         设置c->read->handler为 ngx_http_wait_request_handler
+        设置rev->handler = ngx_http_process_request_line 然后调用ngx_http_process_request_line(rev);
+        最后会调用ngx_http_process_request（一般打断点会在这个函数）
 
 
 

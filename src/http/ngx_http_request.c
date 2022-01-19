@@ -376,7 +376,7 @@ ngx_http_init_connection(ngx_connection_t *c)
     }
 }
 
-
+//// 处理客户端发送的消息     c->read->handler
 static void
 ngx_http_wait_request_handler(ngx_event_t *rev)
 {
@@ -388,17 +388,17 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
     ngx_http_connection_t     *hc;
     ngx_http_core_srv_conf_t  *cscf;
 
-    c = rev->data;
+    c = rev->data;          // 当前连接
 
     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http wait request handler");
 
-    if (rev->timedout) {
+    if (rev->timedout) {    // 超时关闭socket
         ngx_log_error(NGX_LOG_INFO, c->log, NGX_ETIMEDOUT, "client timed out");
         ngx_http_close_connection(c);
         return;
     }
 
-    if (c->close) {
+    if (c->close) {         // 如果标识关闭则关闭socket
         ngx_http_close_connection(c);
         return;
     }
@@ -432,6 +432,7 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
         b->end = b->last + size;
     }
 
+    //// 从客户端接收数据
     n = c->recv(c, b->last, size);
 
     if (n == NGX_AGAIN) {
@@ -457,12 +458,12 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
         return;
     }
 
-    if (n == NGX_ERROR) {
+    if (n == NGX_ERROR) {   // 读出错
         ngx_http_close_connection(c);
         return;
     }
 
-    if (n == 0) {
+    if (n == 0) {           // 客户端关闭
         ngx_log_error(NGX_LOG_INFO, c->log, 0,
                       "client closed connection");
         ngx_http_close_connection(c);
@@ -502,7 +503,7 @@ ngx_http_wait_request_handler(ngx_event_t *rev)
         return;
     }
 
-    rev->handler = ngx_http_process_request_line;
+    rev->handler = ngx_http_process_request_line;   //// 设置rev的handler为ngx_http_process_request_line
     ngx_http_process_request_line(rev);
 }
 
@@ -1844,7 +1845,7 @@ ngx_http_process_request_header(ngx_http_request_t *r)
     return NGX_OK;
 }
 
-
+//// 处理客户端的数据
 void
 ngx_http_process_request(ngx_http_request_t *r)
 {

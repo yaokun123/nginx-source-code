@@ -14,7 +14,6 @@
     <list default="true" id="ca8461e5-b0f8-4b84-b2da-c6cad70c0c7c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/event/ngx_event_accept.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/event/ngx_event_accept.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/http/ngx_http_request.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/ngx_http_request.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,14 +121,7 @@
       <workItem from="1641980940425" duration="5039000" />
       <workItem from="1641986753068" duration="21884000" />
       <workItem from="1642127180741" duration="3636000" />
-      <workItem from="1642489436106" duration="26745000" />
-    </task>
-    <task id="LOCAL-00007" summary="ngx_add_inherited_sockets继承套接字">
-      <created>1641876890244</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1641876890244</updated>
+      <workItem from="1642489436106" duration="28445000" />
     </task>
     <task id="LOCAL-00008" summary="ngx_get_options解析信号">
       <created>1641877246474</created>
@@ -467,14 +459,20 @@
       <option name="project" value="LOCAL" />
       <updated>1642582960492</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="ngx_http_init_connection初始化http的客户端连接比如设置c-&gt;read-&gt;handler">
+      <created>1642584118207</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1642584118207</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ngx_process_events_and_timers进程事件分发器" />
     <MESSAGE value="nginx -s reload" />
     <MESSAGE value="nginx quit" />
     <MESSAGE value="被动套接字" />
@@ -499,18 +497,10 @@
     <MESSAGE value="连接数据结构分配" />
     <MESSAGE value="活跃事件先写入队列" />
     <MESSAGE value="accept的处理函数ngx_event_accept" />
-    <option name="LAST_COMMIT_MESSAGE" value="accept的处理函数ngx_event_accept" />
+    <MESSAGE value="ngx_http_init_connection初始化http的客户端连接比如设置c-&gt;read-&gt;handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="ngx_http_init_connection初始化http的客户端连接比如设置c-&gt;read-&gt;handler" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/core/nginx.c</url>
-          <line>369</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="ccf-&gt;pid.data" />
