@@ -194,7 +194,7 @@ ngx_module_t  ngx_event_core_module = {
     NGX_EVENT_MODULE,                      /* module type */
     NULL,                                  /* init master */
     ngx_event_module_init,                 /* init module */
-    ngx_event_process_init,                /* init process */
+    ngx_event_process_init,                /* init process */ //// 在worker进程初始化的时候会调用
     NULL,                                  /* init thread */
     NULL,                                  /* exit thread */
     NULL,                                  /* exit process */
